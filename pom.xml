@@ -61,7 +61,7 @@
                         <id>default-cli</id>
                         <configuration>
                             <mainClass>
-                                com.hikingtrails.project2hikingtrails/com.hikingtrails.project2hikingtrails.HelloApplication
+                                com.hikingtrails.project2hikingtrails/com.hikingtrails.project2hikingtrails.Main
                             </mainClass>
                             <launcher>app</launcher>
                             <jlinkZipName>app</jlinkZipName>

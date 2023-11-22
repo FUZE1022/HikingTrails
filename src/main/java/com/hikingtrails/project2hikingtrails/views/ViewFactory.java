@@ -1,2 +1,4 @@
-package com.hikingtrails.project2hikingtrails.views;public class ViewFactory {
+package com.hikingtrails.project2hikingtrails.views;
+
+public class ViewFactory {
 }

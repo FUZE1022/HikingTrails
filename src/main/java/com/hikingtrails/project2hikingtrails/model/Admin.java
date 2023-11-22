@@ -1,2 +1,4 @@
-package com.hikingtrails.project2hikingtrails.model;public class Admin {
+package com.hikingtrails.project2hikingtrails.model;
+
+public class Admin {
 }

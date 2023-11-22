@@ -1,17 +1,20 @@
 package com.hikingtrails.project2hikingtrails.model;
 
-import java.util.Optional;
+import com.hikingtrails.project2hikingtrails.util.BackUp;
+
+import java.io.Serializable;
 import java.util.TreeMap;
 
-public class UserTree {
+public class UserSearchTree implements Serializable {
     private TreeMap<String, String> userTreeMap;
 
-    public UserTree() {
+    public UserSearchTree() {
         this.userTreeMap = new TreeMap<>();
     }
 
     public void addUser(User user) {
         userTreeMap.put(user.getUsername(), user.getPassword());
+        BackUp.saveData();
     }
 
     public void removeUser(User user) {
@@ -22,18 +25,6 @@ public class UserTree {
         return userTreeMap.containsKey(username);
     }
 
-    public Optional<User> searchUser(String username) {
-        if (userTreeMap.containsKey(username)) {
-            return Optional.of(new User(username, userTreeMap.get(username)));
-        } else {
-            return Optional.empty();
-        }
-    }
-
-    public User getUser(String username) {
-        return new User(username, userTreeMap.get(username));
-    }
-
     public boolean isValidUser(String username, String password) {
         return userTreeMap.containsKey(username) && userTreeMap.get(username).equals(password);
     }
@@ -42,4 +33,9 @@ public class UserTree {
         return userTreeMap;
     }
 
+    public void displayUserTreeMap() {
+        for (String username : userTreeMap.keySet()) {
+            System.out.println(username + " " + userTreeMap.get(username));
+        }
+    }
 }

@@ -1,2 +1,4 @@
-package com.hikingtrails.project2hikingtrails.controller;public class UserController {
+package com.hikingtrails.project2hikingtrails.controller;
+
+public class UserController {
 }
