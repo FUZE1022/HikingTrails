@@ -12,6 +12,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
@@ -29,7 +30,8 @@ public class NewUserController {
     @FXML
     private ImageView profilePictureIv;
     @FXML
-    private Label inValidUsername, inValidAccount1, inValidAccount2, inValidAccount3, inValidAccount4;
+    private Label inValidUsername, inValidAccount1, inValidAccount2, inValidAccount3, inValidAccount4, inValidAccount5,
+            inValidAccount6, inValidAccount7;
     private FileChooser fileChooser;
     private File file;
     private UserSetContainer userSetContainer = DataCenter.getInstance().getUserSetContainer();
@@ -49,31 +51,41 @@ public class NewUserController {
         dialog.setHeaderText("Is this the user you'd like to create?");
         dialog.setContentText("Username: " + usernameTf.getText() + "\n" +
                 "Password: " + passwordTf.getText() + "\n" +
-                "Phone Number: " + phoneNumTf.getText());
+                "Phone Number: " + phoneNumTf.getText().replaceFirst("(\\d{3})(\\d{3})(\\d+)", "($1) $2-$3"));
 
         ButtonType yesButton = new ButtonType("Yes", ButtonType.OK.getButtonData());
         ButtonType noButton = new ButtonType("No", ButtonType.CANCEL.getButtonData());
         dialog.getDialogPane().getButtonTypes().addAll(yesButton, noButton);
 
-        dialog.showAndWait().ifPresent(buttonType -> {
-            if (buttonType == yesButton) {
-                userSetContainer.addUserToSet(new User(usernameTf.getText(), passwordTf.getText(),
-                        phoneNumTf.getText(), file.toURI().toString()));
-                userSearchTree.addUser(new User(usernameTf.getText(), passwordTf.getText(), phoneNumTf.getText(),
-                        file.toURI().toString()));
-                Alert successAlert = new Alert(Alert.AlertType.INFORMATION);
-                successAlert.setTitle("Success");
-                successAlert.setHeaderText(null);
-                successAlert.setContentText("User created successfully!");
-                successAlert.showAndWait();
-            }
-        });
+        try {
+            dialog.showAndWait().ifPresent(buttonType -> {
+                if (buttonType == yesButton) {
+                    userSetContainer.addUserToSet(new User(usernameTf.getText(), passwordTf.getText(),
+                            phoneNumTf.getText(), file.toURI().toString()));
+                    userSearchTree.addUser(new User(usernameTf.getText(), passwordTf.getText(), phoneNumTf.getText(),
+                            file.toURI().toString()));
+                    Alert successAlert = new Alert(Alert.AlertType.INFORMATION);
+                    successAlert.setTitle("Success");
+                    successAlert.setHeaderText(null);
+                    successAlert.setContentText("User created successfully!");
+                    successAlert.showAndWait();
+                    goBackBtn.fire();
+                }
+            });
+        } catch (Exception e) {
+            Alert errorAlert = new Alert(Alert.AlertType.ERROR);
+            errorAlert.setTitle("Error");
+            errorAlert.setHeaderText(null);
+            errorAlert.setContentText("Make sure you have filled out all fields \n" +
+                    "and have chosen a profile picture!");
+            errorAlert.showAndWait();
+        }
     }
 
     public void chooseProfilePicture() {
         file = fileChooser.showOpenDialog(null);
         if (file != null) {
-            profilePictureIv.setImage(new javafx.scene.image.Image(file.toURI().toString()));
+            profilePictureIv.setImage(new Image(file.toURI().toString()));
         }
     }
 
@@ -90,16 +102,14 @@ public class NewUserController {
     }
 
     public void usernameOnTyped() {
-        if (userSetContainer.containsUserInSet(usernameTf.getText())) {
-            usernameTf.setStyle("-fx-text-inner-color: red;");
-            inValidUsername.setVisible(true);
-            inValidUsername.setText("Username already exists");
-            createAccountBtn.setDisable(true);
-        } else {
-            usernameTf.setStyle("-fx-text-inner-color: green;");
-            inValidUsername.setVisible(false);
-            createAccountBtn.setDisable(false);
-        }
+        String username = usernameTf.getText();
+
+        boolean isTaken = userSetContainer.containsUsernameInSet(username);
+        boolean showError = isTaken;
+
+        inValidUsername.setVisible(showError);
+        usernameTf.setStyle(showError ? "-fx-text-inner-color: red;" : "-fx-text-inner-color: green;");
+        createAccountBtn.setDisable(showError);
     }
 
     public void passwordOnTyped() {
@@ -122,54 +132,18 @@ public class NewUserController {
     }
 
     public void phoneOnTyped() {
-        //TODO fix phone number formatting
-//        String currentText = phoneNumTf.getText();
-//
-//        // Remove non-numeric characters
-//        String numericText = currentText.replaceAll("[^0-9]", "");
-//
-//        // Format the text as (123)-456-7890
-//        StringBuilder formattedText = new StringBuilder("(");
-//        for (int i = 0; i < Math.min(numericText.length(), 10); i++) {
-//            formattedText.append(numericText.charAt(i));
-//            if (i == 2) {
-//                formattedText.append(")-");
-//            } else if (i == 5) {
-//                formattedText.append("-");
-//            }
-//        }
-//
-//        // Update the TextField with the formatted text
-//        phoneNumTf.setText(formattedText.toString());
-//
-//        // Enable or disable the button based on the format
-//        createAccountBtn.setDisable(!numericText.matches("\\d{10}"));
-        // Get the current text in the TextField
-        // Get the current text in the TextField
-        String currentText = phoneNumTf.getText();
+        String phone = phoneNumTf.getText();
+        boolean isLengthValid = phone.length() == 10;
+        boolean hasNumber = phone.matches("[0-9]+");
+        boolean isTaken = userSetContainer.containsUserNumberInSet(phone);
 
-        // Remove non-numeric characters
-        String numericText = currentText.replaceAll("[^0-9]", "");
+        boolean showError = !isLengthValid || !hasNumber || isTaken;
 
-        // Format the text as (123)-456-7890
-        StringBuilder formattedText = new StringBuilder("(");
-        for (int i = 0; i < Math.min(numericText.length(), 10); i++) {
-            formattedText.append(numericText.charAt(i));
-            if (i == 2 || i == 5) {
-                formattedText.append(")-");
-            } else if (i == 8) {
-                formattedText.append("-");
-            }
-        }
+        inValidAccount5.setVisible(!hasNumber);
+        inValidAccount6.setVisible(!isLengthValid);
+        inValidAccount7.setVisible(isTaken);
 
-        // Update the TextField with the formatted text
-        phoneNumTf.setText(formattedText.toString());
-
-        // Move caret to the next available position
-        int caretPosition = Math.min(phoneNumTf.getCaretPosition(), 13);
-        phoneNumTf.positionCaret(caretPosition);
-
-        // Enable or disable the button based on the format
-        createAccountBtn.setDisable(numericText.length() != 10);
+        phoneNumTf.setStyle(showError ? "-fx-text-inner-color: red;" : "-fx-text-inner-color: green;");
+        createAccountBtn.setDisable(showError);
     }
 }

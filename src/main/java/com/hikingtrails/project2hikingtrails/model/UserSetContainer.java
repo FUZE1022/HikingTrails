@@ -23,12 +23,24 @@ public class UserSetContainer implements Serializable, Comparator<User> {
         userSet.remove(user);
     }
 
-    public boolean containsUserInSet(String username) {
+    public boolean containsUsernameInSet(String username) {
         for (User user : userSet) {
             if (user.getUsername().equals(username))
                 return true;
         }
         return false;
+    }
+
+    public boolean containsUserNumberInSet(String phonenumber) {
+        for (User user : userSet) {
+            if (user.getPhoneNumber().equals(phonenumber))
+                return true;
+        }
+        return false;
+    }
+
+    public boolean containsUserInSet(User user) {
+        return userSet.contains(user);
     }
 
     public Set<User> getUserSet() {

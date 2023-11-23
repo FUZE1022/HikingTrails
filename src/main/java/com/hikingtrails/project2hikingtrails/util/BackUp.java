@@ -22,7 +22,7 @@ public final class BackUp {
             createFile(BACKUP_USERSTREE_FILE_PATH);
             UserSetContainer userSetContainer = new UserSetContainer();
             DataCenter.getInstance().setUserSetContainer(userSetContainer);
-            UserSearchTree userSearchTree = AddToTree.addToTree(userSetContainer);
+            UserSearchTree userSearchTree = new UserSearchTree();
             DataCenter.getInstance().setUserSearchTree(userSearchTree);
             saveData();
             return;
@@ -30,8 +30,6 @@ public final class BackUp {
         try {
             UserSetContainer loadUserSetContainer =
                     (UserSetContainer) Serializer.deserializeFromFile(BACKUP_USERS_FILE_PATH);
-            UserSearchTree userSearchTree = AddToTree.addToTree(loadUserSetContainer);
-            DataCenter.getInstance().setUserSearchTree(userSearchTree);
             UserSearchTree loadUserSearchTree =
                     (UserSearchTree) Serializer.deserializeFromFile(BACKUP_USERSTREE_FILE_PATH);
             DataCenter.getInstance().setUserSetContainer(loadUserSetContainer);

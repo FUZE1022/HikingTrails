@@ -16,7 +16,7 @@
          <children>
             <TextField fx:id="usernameTf" onKeyTyped="#usernameOnTyped" promptText="Username" />
             <TextField fx:id="passwordTf" onKeyTyped="#passwordOnTyped" promptText="Password" />
-            <TextField fx:id="phoneNumTf" onKeyTyped="#phoneOnTyped" promptText="Phone # (123)-456-7890" />
+            <TextField fx:id="phoneNumTf" onKeyTyped="#phoneOnTyped" promptText="Phone # Ex: 1234567890" />
          </children>
       </VBox>
       <ImageView fx:id="profilePictureIv" fitHeight="115.0" fitWidth="133.0" layoutX="313.0" layoutY="66.0" pickOnBounds="true" preserveRatio="true">
@@ -29,20 +29,23 @@
       <Line endX="14.0" layoutX="414.0" layoutY="66.0" startX="-100.0" />
       <Line endX="27.0" endY="1.0" layoutX="401.0" layoutY="180.0" startX="-88.5" startY="-0.5" />
       <Line endX="10.5" endY="59.0" layoutX="418.0" layoutY="121.0" startX="10.5" startY="-55.0" />
-      <Button fx:id="createAccountBtn" layoutX="251.0" layoutY="311.0" mnemonicParsing="false" onAction="#createAccount" prefHeight="25.0" prefWidth="98.0" text="Create Account" />
+      <Button fx:id="createAccountBtn" defaultButton="true" disable="true" layoutX="251.0" layoutY="332.0" mnemonicParsing="false" onAction="#createAccount" prefHeight="25.0" prefWidth="98.0" text="Create Account" />
       <Label layoutX="231.0" layoutY="20.0" text="Account Creation">
          <font>
             <Font size="22.0" />
          </font>
       </Label>
       <Button fx:id="goBackBtn" cancelButton="true" layoutX="526.0" layoutY="15.0" mnemonicParsing="false" onAction="#goBack" text="Go Back" />
-      <VBox layoutX="45.0" layoutY="192.0">
+      <VBox layoutX="45.0" layoutY="192.0" prefHeight="119.0" prefWidth="258.0">
          <children>
-            <Label fx:id="inValidUsername" prefHeight="17.0" prefWidth="168.0" text="Username already taken" textFill="RED" visible="false" />
-            <Label fx:id="inValidAccount1" prefHeight="17.0" prefWidth="191.0" text="Password needs atleast 8 characters" textFill="RED" visible="false" />
-            <Label fx:id="inValidAccount2" prefHeight="17.0" prefWidth="191.0" text="Password needs alteast 1 number" textFill="RED" visible="false" />
-            <Label fx:id="inValidAccount3" prefHeight="17.0" prefWidth="227.0" text="Password needs atleast 1 special character" textFill="RED" visible="false" />
-            <Label fx:id="inValidAccount4" prefHeight="17.0" prefWidth="212.0" text="Password needs atleast 1 captial letter" textFill="RED" visible="false" />
+            <Label fx:id="inValidUsername" prefHeight="17.0" prefWidth="209.0" text="• Username already taken" textFill="RED" visible="false" />
+            <Label fx:id="inValidAccount1" prefHeight="17.0" prefWidth="238.0" text="• Password needs atleast 8 characters" textFill="RED" visible="false" />
+            <Label fx:id="inValidAccount2" prefHeight="17.0" prefWidth="207.0" text="• Password needs alteast 1 number" textFill="RED" visible="false" />
+            <Label fx:id="inValidAccount3" prefHeight="17.0" prefWidth="240.0" text="• Password needs atleast 1 special character" textFill="RED" visible="false" />
+            <Label fx:id="inValidAccount4" prefHeight="17.0" prefWidth="220.0" text="• Password needs atleast 1 captial letter" textFill="RED" visible="false" />
+            <Label fx:id="inValidAccount5" prefHeight="17.0" prefWidth="212.0" text="• Phone number can only be numbers" textFill="RED" visible="false" />
+            <Label fx:id="inValidAccount6" prefHeight="17.0" prefWidth="250.0" text="• Phone number can only be 10 numbers long" textFill="RED" visible="false" />
+            <Label fx:id="inValidAccount7" prefHeight="17.0" prefWidth="250.0" text="• Phone number already taken" textFill="RED" visible="false" />
          </children>
       </VBox>
    </children>
