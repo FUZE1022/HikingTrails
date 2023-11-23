@@ -1,4 +1,4 @@
 package com.hikingtrails.project2hikingtrails.model;
 
-public class Admin {
+public class Admin /*extends User*/{
 }

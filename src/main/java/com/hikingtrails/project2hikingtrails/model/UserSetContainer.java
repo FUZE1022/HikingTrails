@@ -4,6 +4,7 @@ import com.hikingtrails.project2hikingtrails.util.BackUp;
 
 import java.io.Serializable;
 import java.util.Comparator;
+import java.util.Optional;
 import java.util.Set;
 import java.util.TreeSet;
 
@@ -41,6 +42,14 @@ public class UserSetContainer implements Serializable, Comparator<User> {
 
     public boolean containsUserInSet(User user) {
         return userSet.contains(user);
+    }
+
+    public User getUser(String username) {
+        for (User user : userSet) {
+            if (user.getUsername().equals(username))
+                return user;
+        }
+        return null;
     }
 
     public Set<User> getUserSet() {

@@ -1,10 +1,8 @@
 package com.hikingtrails.project2hikingtrails.controller;
 
 import com.hikingtrails.project2hikingtrails.model.DataCenter;
-import com.hikingtrails.project2hikingtrails.model.User;
 import com.hikingtrails.project2hikingtrails.model.UserSearchTree;
 import com.hikingtrails.project2hikingtrails.model.UserSetContainer;
-import com.hikingtrails.project2hikingtrails.util.AddToTree;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -29,9 +27,18 @@ public class MainController {
     private Hyperlink newUserHl;
     private UserSetContainer userSetContainer = DataCenter.getInstance().getUserSetContainer();
     private UserSearchTree userSearchTree = DataCenter.getInstance().getUserSearchTree();
-    public void login(){
-        if(userSearchTree.isValidUser(username.getText(), passwordPf.getText())){
-            System.out.println("Valid user");
+    public void login(ActionEvent event) throws IOException {
+        if(userSearchTree.isValidUser(username.getText().trim(), passwordPf.getText().trim())){
+            DataCenter.getInstance().setCurrentUser(userSetContainer.getUser(username.getText().trim()));
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/hikingtrails/project2hikingtrails/views" +
+                    "/UserMainView.fxml"));
+            Stage stage = new Stage();
+            Scene newScene = new Scene(fxmlLoader.load(), 884, 582);
+            stage.setTitle("User creation");
+            Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            currentStage.close();
+            stage.setScene(newScene);
+            stage.show();
         }
         else {
             System.out.println("Invalid user");

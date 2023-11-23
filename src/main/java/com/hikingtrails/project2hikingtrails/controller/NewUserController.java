@@ -4,7 +4,6 @@ import com.hikingtrails.project2hikingtrails.model.DataCenter;
 import com.hikingtrails.project2hikingtrails.model.User;
 import com.hikingtrails.project2hikingtrails.model.UserSearchTree;
 import com.hikingtrails.project2hikingtrails.model.UserSetContainer;
-import com.hikingtrails.project2hikingtrails.util.AddToTree;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 
