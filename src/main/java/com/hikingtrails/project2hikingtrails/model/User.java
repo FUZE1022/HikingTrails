@@ -3,15 +3,17 @@ package com.hikingtrails.project2hikingtrails.model;
 import java.io.Serializable;
 import java.util.Objects;
 
-public class User implements Serializable {
-    private String username, password, phoneNumber, profilePicture, hikingHistory, followers, following, reviews;
+public class User implements Serializable, Comparable<User> {
+    private String username, password, phoneNumber, profilePicture, followers, following;
+    private HikingHistory hikingHistory;
+    private Review reviews;
 
     public User(String username, String password, String phoneNumber, String profilePicture) {
-        this(username, password, phoneNumber, profilePicture, "", "", "", "");
+        this(username, password, phoneNumber, profilePicture, null, "", "", null);
     }
 
-    public User(String username, String password, String phoneNumber, String profilePicture, String hikingHistory,
-                String followers, String following, String reviews) {
+    public User(String username, String password, String phoneNumber, String profilePicture, HikingHistory hikingHistory,
+                String followers, String following, Review reviews) {
         this.username = username;
         this.password = password;
         this.phoneNumber = phoneNumber;
@@ -38,7 +40,7 @@ public class User implements Serializable {
         return profilePicture;
     }
 
-    public String getHikingHistory() {
+    public HikingHistory getHikingHistory() {
         return hikingHistory;
     }
 
@@ -50,7 +52,7 @@ public class User implements Serializable {
         return following;
     }
 
-    public String getReviews() {
+    public Review getReviews() {
         return reviews;
     }
 
@@ -83,5 +85,10 @@ public class User implements Serializable {
     public int hashCode() {
         return Objects.hash(username, password, phoneNumber, profilePicture, hikingHistory, followers, following,
                 reviews);
+    }
+
+    @Override
+    public int compareTo(User o) {
+        return this.username.compareTo(o.username);
     }
 }

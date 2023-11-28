@@ -12,10 +12,12 @@ public class DataCenter implements Serializable {
     private User currentUser;
     private UserSetContainer userSetContainer;
     private UserSearchTree userSearchTree;
+    private TrailSetContainer trailSetContainer;
 
     private DataCenter() {
         userSetContainer = new UserSetContainer();
         userSearchTree = new UserSearchTree();
+        trailSetContainer = new TrailSetContainer();
     }
 
     public static DataCenter getInstance() {
@@ -49,6 +51,15 @@ public class DataCenter implements Serializable {
 
     public void setUserSearchTree(UserSearchTree userSearchTree) {
         this.userSearchTree = userSearchTree;
+        BackUp.saveData();
+    }
+
+    public TrailSetContainer getTrailSetContainer() {
+        return trailSetContainer;
+    }
+
+    public void setTrailSetContainer(TrailSetContainer trailSetContainer) {
+        this.trailSetContainer = trailSetContainer;
         BackUp.saveData();
     }
 }

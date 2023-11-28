@@ -8,11 +8,11 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.TreeSet;
 
-public class UserSetContainer implements Serializable, Comparator<User> {
+public class UserSetContainer implements Serializable {
     private Set<User> userSet;
 
     public UserSetContainer() {
-        this.userSet = new TreeSet<>(this);
+        this.userSet = new TreeSet<>();
     }
 
     public void addUserToSet(User user) {
@@ -38,10 +38,6 @@ public class UserSetContainer implements Serializable, Comparator<User> {
                 return true;
         }
         return false;
-    }
-
-    public boolean containsUserInSet(User user) {
-        return userSet.contains(user);
     }
 
     public User getUser(String username) {
@@ -71,10 +67,5 @@ public class UserSetContainer implements Serializable, Comparator<User> {
         return "UserSetContainer{" +
                 "userSet=" + userSet +
                 '}';
-    }
-
-    @Override
-    public int compare(User o1, User o2) {
-        return o1.getUsername().compareTo(o2.getUsername());
     }
 }

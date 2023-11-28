@@ -8,10 +8,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Hyperlink;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -34,17 +31,19 @@ public class MainController {
                     "/UserMainView.fxml"));
             Stage stage = new Stage();
             Scene newScene = new Scene(fxmlLoader.load(), 884, 582);
-            stage.setTitle("User creation");
+            //stage.initStyle(StageStyle.UNDECORATED);
             Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             currentStage.close();
             stage.setScene(newScene);
             stage.show();
         }
         else {
-            System.out.println("Invalid user");
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("User not found");
+            alert.setHeaderText(null);
+            alert.setContentText("Username and password combination not found!");
+            alert.showAndWait();
         }
-        userSetContainer.displayUserSet();
-        userSearchTree.displayUserTreeMap();
     }
 
     public void goToUserCreation(ActionEvent event) throws IOException {
