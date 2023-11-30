@@ -3,6 +3,7 @@ package com.hikingtrails.project2hikingtrails.model;
 import com.hikingtrails.project2hikingtrails.util.BackUp;
 
 import java.io.Serializable;
+import java.lang.reflect.Array;
 import java.util.Comparator;
 import java.util.Optional;
 import java.util.Set;
@@ -26,15 +27,15 @@ public class UserSetContainer implements Serializable {
 
     public boolean containsUsernameInSet(String username) {
         for (User user : userSet) {
-            if (user.getUsername().equals(username))
+            if (user.getUsername().equalsIgnoreCase(username))
                 return true;
         }
         return false;
     }
 
-    public boolean containsUserNumberInSet(String phonenumber) {
+    public boolean containsUserNumberInSet(String phoneNumber) {
         for (User user : userSet) {
-            if (user.getPhoneNumber().equals(phonenumber))
+            if (user.getPhoneNumber().equals(phoneNumber))
                 return true;
         }
         return false;
@@ -68,4 +69,6 @@ public class UserSetContainer implements Serializable {
                 "userSet=" + userSet +
                 '}';
     }
+
+
 }

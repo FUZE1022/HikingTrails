@@ -6,14 +6,14 @@ import java.util.Objects;
 public class User implements Serializable, Comparable<User> {
     private String username, password, phoneNumber, profilePicture, followers, following;
     private HikingHistory hikingHistory;
-    private Review reviews;
+    private ReviewSetContainer reviews;
 
     public User(String username, String password, String phoneNumber, String profilePicture) {
         this(username, password, phoneNumber, profilePicture, null, "", "", null);
     }
 
     public User(String username, String password, String phoneNumber, String profilePicture, HikingHistory hikingHistory,
-                String followers, String following, Review reviews) {
+                String followers, String following, ReviewSetContainer reviews) {
         this.username = username;
         this.password = password;
         this.phoneNumber = phoneNumber;
@@ -52,7 +52,7 @@ public class User implements Serializable, Comparable<User> {
         return following;
     }
 
-    public Review getReviews() {
+    public ReviewSetContainer getReviews() {
         return reviews;
     }
 

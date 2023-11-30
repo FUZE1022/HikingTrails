@@ -15,9 +15,9 @@
 <?import javafx.scene.text.Font?>
 <?import org.kordamp.ikonli.javafx.FontIcon?>
 
-<AnchorPane id="AnchorPane" prefHeight="582.0" prefWidth="884.0" style="-fx-background-color: ffffff;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.hikingtrails.project2hikingtrails.controller.UserMainController">
+<AnchorPane id="AnchorPane" prefHeight="700.0" prefWidth="1180.0" style="-fx-background-color: fff;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.hikingtrails.project2hikingtrails.controller.UserMainController">
    <children>
-      <Pane layoutY="-6.0" prefHeight="161.0" prefWidth="884.0" style="-fx-background-color: #39A67F;" AnchorPane.bottomAnchor="427.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="-6.0">
+      <Pane layoutY="-5.0" prefHeight="158.0" prefWidth="1180.0" style="-fx-background-color: #39A67F;" AnchorPane.bottomAnchor="548.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="-6.0">
          <children>
             <ImageView fx:id="profilePictureIv" fitHeight="54.0" fitWidth="59.0" layoutX="14.0" layoutY="71.0" pickOnBounds="true" preserveRatio="true">
                <effect>
@@ -26,23 +26,23 @@
                <image>
                   <Image url="@../images/blankProfilePicture.png" />
                </image></ImageView>
-            <Label fx:id="userLbl" layoutX="75.0" layoutY="81.0" prefHeight="33.0" prefWidth="117.0" text="[Current User]" textFill="WHITE">
+            <Label fx:id="userLbl" layoutX="75.0" layoutY="85.0" text="[Current User]" textFill="WHITE">
                <font>
                   <Font name="Segoe UI Bold" size="16.0" />
                </font>
             </Label>
-            <TextField focusTraversable="false" layoutX="579.0" layoutY="40.0" prefHeight="30.0" prefWidth="207.0" promptText="Search User" style="-fx-background-color: #39A67F; -fx-text-inner-color: #fff;">
+            <TextField fx:id="userSearchTf" focusTraversable="false" layoutX="849.0" layoutY="43.0" promptText="Search User" style="-fx-background-color: #39A67F; -fx-text-inner-color: #fff;">
                <font>
                   <Font size="14.0" />
                </font>
             </TextField>
-            <Line endX="100.0" layoutX="688.0" layoutY="70.0" startX="-100.0" stroke="WHITE" strokeWidth="2.0" />
-            <Button fx:id="exitBtn" layoutX="818.0" layoutY="4.0" mnemonicParsing="false" onAction="#exit" prefHeight="70.0" prefWidth="66.0" style="-fx-background-color: #39A67F;" text="X" textFill="WHITE">
+            <Line endX="100.0" layoutX="954.0" layoutY="71.0" startX="-100.0" stroke="WHITE" strokeWidth="2.0" />
+            <Button fx:id="exitBtn" layoutX="1117.0" layoutY="6.0" mnemonicParsing="false" onAction="#exit" style="-fx-background-color: #39A67F;" text="X" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="32.0" />
                </font>
             </Button>
-            <ImageView fitHeight="99.0" fitWidth="103.0" layoutX="302.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="99.0" fitWidth="103.0" layoutX="436.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../images/logo.png" />
                </image>
@@ -50,7 +50,7 @@
                   <InnerShadow />
                </effect>
             </ImageView>
-            <Label layoutX="412.0" layoutY="32.0" prefHeight="54.0" prefWidth="148.0" text="Path Pal" textFill="#84e83d">
+            <Label layoutX="554.0" layoutY="37.0" text="Path Pal" textFill="#84e83d">
                <font>
                   <Font name="Roboto Slab Medium" size="31.0" />
                </font>
@@ -58,14 +58,14 @@
                   <DropShadow />
                </effect>
             </Label>
-            <ImageView fitHeight="30.0" fitWidth="25.0" layoutX="796.0" layoutY="45.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="30.0" fitWidth="25.0" layoutX="1061.0" layoutY="47.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../images/m2i8G6H7d3d3H7K9.png" />
                </image>
             </ImageView>
          </children>
       </Pane>
-      <VBox layoutY="155.0" prefHeight="192.0" prefWidth="171.0" style="-fx-background-color: #fffffff;" AnchorPane.bottomAnchor="235.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="713.0" AnchorPane.topAnchor="155.0">
+      <VBox layoutY="158.0" prefHeight="310.0" prefWidth="176.0" style="-fx-background-color: white;" AnchorPane.bottomAnchor="232.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="1004.0" AnchorPane.topAnchor="158.0">
          <children>
             <Button fx:id="homeBtn" mnemonicParsing="false" onAction="#homeOnAction" prefHeight="48.0" prefWidth="170.0" style="-fx-background-color: #fff;" text="Home">
                <graphic>
@@ -82,10 +82,10 @@
                </graphic></Button>
          </children>
       </VBox>
-      <Button fx:id="backBtn" layoutY="533.0" mnemonicParsing="false" onAction="#goBack" prefHeight="48.0" prefWidth="170.0" style="-fx-background-color: fff;" text="Logout" AnchorPane.bottomAnchor="1.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="714.0" AnchorPane.topAnchor="533.0">
+      <Button fx:id="backBtn" layoutY="634.0" mnemonicParsing="false" onAction="#goBack" prefHeight="65.0" prefWidth="176.0" style="-fx-background-color: fff;" text="Logout" AnchorPane.bottomAnchor="1.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="1004.0" AnchorPane.topAnchor="634.0">
          <graphic>
             <FontIcon iconLiteral="far-arrow-alt-circle-left" />
          </graphic></Button>
-      <StackPane fx:id="stackPane" layoutX="163.0" layoutY="108.0" prefHeight="474.0" prefWidth="720.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="163.0" AnchorPane.rightAnchor="1.0" AnchorPane.topAnchor="108.0" />
+      <StackPane fx:id="stackPane" layoutX="163.0" layoutY="131.0" prefHeight="569.0" prefWidth="1018.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="163.0" AnchorPane.rightAnchor="-1.0" AnchorPane.topAnchor="108.0" />
    </children>
 </AnchorPane>

@@ -1,6 +1,7 @@
 package com.hikingtrails.project2hikingtrails.controller;
 
 import com.hikingtrails.project2hikingtrails.model.DataCenter;
+import com.hikingtrails.project2hikingtrails.model.TrailSetContainer;
 import com.hikingtrails.project2hikingtrails.model.UserSearchTree;
 import com.hikingtrails.project2hikingtrails.model.UserSetContainer;
 import javafx.event.ActionEvent;
@@ -30,7 +31,7 @@ public class MainController {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/hikingtrails/project2hikingtrails/views" +
                     "/UserMainView.fxml"));
             Stage stage = new Stage();
-            Scene newScene = new Scene(fxmlLoader.load(), 884, 582);
+            Scene newScene = new Scene(fxmlLoader.load(), 1180, 700);
             //stage.initStyle(StageStyle.UNDECORATED);
             Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             currentStage.close();

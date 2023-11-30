@@ -1,10 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 
-<AnchorPane prefHeight="474.0" prefWidth="720.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane prefHeight="592.0" prefWidth="1018.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.hikingtrails.project2hikingtrails.controller.TrailController">
    <children>
-      <Pane prefHeight="46.0" prefWidth="720.0" style="-fx-background-color: #39A67F;" />
+      <Pane prefHeight="44.0" prefWidth="1018.0" style="-fx-background-color: #39A67F;" />
+      <TableView fx:id="trailTV" layoutX="65.0" layoutY="349.0" prefHeight="200.0" prefWidth="857.0">
+        <columns>
+          <TableColumn fx:id="trailNameTC" prefWidth="257.60003662109375" text="Trail Name" />
+          <TableColumn fx:id="headAddressTC" minWidth="0.0" prefWidth="233.5999755859375" text="Head Address" />
+            <TableColumn fx:id="lengthTC" minWidth="0.0" prefWidth="62.0" text="Length" />
+            <TableColumn fx:id="elevationTC" minWidth="0.0" prefWidth="92.0" text="Elevation Gain" />
+            <TableColumn fx:id="difficultyTC" minWidth="0.0" prefWidth="75.0" text="Difficulty" />
+            <TableColumn fx:id="typeTC" minWidth="0.0" prefWidth="137.0" text="Type" />
+        </columns>
+      </TableView>
+      <Button fx:id="filterBtn" layoutX="89.0" layoutY="188.0" mnemonicParsing="false" onAction="#filterBtnOnAction" prefHeight="25.0" prefWidth="102.0" text="Filter" visible="false" />
+      <TextField fx:id="filterTf" layoutX="237.0" layoutY="149.0" promptText="Enter Trail Name" visible="false" />
+      <ComboBox fx:id="trailComboBoxfilterBy" layoutX="236.0" layoutY="149.0" onAction="#filterBy" prefWidth="150.0" visible="false" />
+      <ComboBox fx:id="trailComboBoxfilter" layoutX="74.0" layoutY="149.0" onAction="#filter" prefWidth="150.0" promptText="Filter" />
    </children>
 </AnchorPane>

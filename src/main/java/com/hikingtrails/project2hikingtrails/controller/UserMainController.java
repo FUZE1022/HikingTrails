@@ -11,14 +11,18 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import org.controlsfx.control.textfield.AutoCompletionBinding;
+import org.controlsfx.control.textfield.TextFields;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Arrays;
 import java.util.ResourceBundle;
 
 public class UserMainController implements Initializable {
@@ -30,6 +34,8 @@ public class UserMainController implements Initializable {
     private Button exitBtn, backBtn, homeBtn, profileBtn, trailsBtn;
     @FXML
     private ImageView profilePictureIv;
+    @FXML
+    private TextField userSearchTf;
 
     private User currentUser = DataCenter.getInstance().getCurrentUser();
 
@@ -37,6 +43,7 @@ public class UserMainController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         userLbl.setText(currentUser.getUsername());
         profilePictureIv.setImage(new Image(currentUser.getProfilePicture()));
+
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/hikingtrails/project2hikingtrails/views" +
                 "/UserHomeView.fxml"));
         Parent newSceneRoot = null;

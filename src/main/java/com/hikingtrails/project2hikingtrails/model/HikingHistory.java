@@ -5,7 +5,8 @@ import java.util.Objects;
 public class HikingHistory {
     private String trialName, startTime, endTime, distance, duration, pictures ,avgPace, comments;
 
-    public HikingHistory(String trialName, String startTime, String endTime, String distance, String duration, String pictures, String avgPace, String comments) {
+    public HikingHistory(String trialName, String startTime, String endTime, String distance, String duration,
+                         String pictures, String avgPace, String comments) {
         this.trialName = trialName;
         this.startTime = startTime;
         this.endTime = endTime;

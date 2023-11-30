@@ -38,4 +38,8 @@ public class UserSearchTree implements Serializable {
             System.out.println(username + " " + userTreeMap.get(username));
         }
     }
+
+    public Object[] getUserArray() {
+        return userTreeMap.keySet().toArray();
+    }
 }

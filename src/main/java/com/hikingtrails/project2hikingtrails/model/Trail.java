@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.Objects;
 
 public class Trail implements Serializable, Comparable<Trail> {
-    private String name, headAddress, length, elevationGain, difficulty, type;
+    private String name, headAddress, elevationGain, length, difficulty, type;
     private Review reviews;
 
     public Trail(String name, String headAddress, String length, String elevationGain, String difficulty, String type

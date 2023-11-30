@@ -1,5 +1,7 @@
 package com.hikingtrails.project2hikingtrails.model;
 
+import com.hikingtrails.project2hikingtrails.util.BackUp;
+
 import java.io.Serializable;
 import java.util.Set;
 import java.util.TreeSet;
@@ -13,6 +15,7 @@ public class TrailSetContainer implements Serializable {
 
     public void addTrail(Trail trail) {
         this.trailSet.add(trail);
+        BackUp.saveData();
     }
 
     public void removeTrail(Trail trail) {
@@ -29,6 +32,14 @@ public class TrailSetContainer implements Serializable {
 
     public void setTrailSet(Set<Trail> trailSet) {
         this.trailSet = trailSet;
+    }
+
+    public Trail getTrail(String name) {
+        for (Trail trail : trailSet) {
+            if (trail.getName().equals(name))
+                return trail;
+        }
+        return null;
     }
 
     public void displayTrailSet() {

@@ -1,6 +1,7 @@
 module com.hikingtrails.project2hikingtrails {
     requires javafx.controls;
     requires javafx.fxml;
+    requires org.controlsfx.controls;
 
 
     opens com.hikingtrails.project2hikingtrails to javafx.fxml;
