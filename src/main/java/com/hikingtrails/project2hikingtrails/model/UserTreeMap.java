@@ -5,10 +5,10 @@ import com.hikingtrails.project2hikingtrails.util.BackUp;
 import java.io.Serializable;
 import java.util.TreeMap;
 
-public class UserSearchTree implements Serializable {
+public class UserTreeMap implements Serializable {
     private TreeMap<String, String> userTreeMap;
 
-    public UserSearchTree() {
+    public UserTreeMap() {
         this.userTreeMap = new TreeMap<>();
     }
 
@@ -37,9 +37,5 @@ public class UserSearchTree implements Serializable {
         for (String username : userTreeMap.keySet()) {
             System.out.println(username + " " + userTreeMap.get(username));
         }
-    }
-
-    public Object[] getUserArray() {
-        return userTreeMap.keySet().toArray();
     }
 }

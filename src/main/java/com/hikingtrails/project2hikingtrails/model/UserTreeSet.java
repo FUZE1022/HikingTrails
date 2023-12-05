@@ -3,16 +3,12 @@ package com.hikingtrails.project2hikingtrails.model;
 import com.hikingtrails.project2hikingtrails.util.BackUp;
 
 import java.io.Serializable;
-import java.lang.reflect.Array;
-import java.util.Comparator;
-import java.util.Optional;
-import java.util.Set;
 import java.util.TreeSet;
 
-public class UserSetContainer implements Serializable {
-    private Set<User> userSet;
+public class UserTreeSet implements Serializable {
+    private TreeSet<User> userSet;
 
-    public UserSetContainer() {
+    public UserTreeSet() {
         this.userSet = new TreeSet<>();
     }
 
@@ -26,34 +22,21 @@ public class UserSetContainer implements Serializable {
     }
 
     public boolean containsUsernameInSet(String username) {
-        for (User user : userSet) {
-            if (user.getUsername().equalsIgnoreCase(username))
-                return true;
-        }
-        return false;
+        return userSet.stream().anyMatch(user -> user.getUsername().equalsIgnoreCase(username));
     }
 
     public boolean containsUserNumberInSet(String phoneNumber) {
-        for (User user : userSet) {
-            if (user.getPhoneNumber().equals(phoneNumber))
-                return true;
-        }
-        return false;
+        return userSet.stream().anyMatch(user -> user.getPhoneNumber().equals(phoneNumber));
     }
 
     public User getUser(String username) {
-        for (User user : userSet) {
-            if (user.getUsername().equals(username))
-                return user;
-        }
-        return null;
+        return userSet.stream().filter(user -> user.getUsername().equals(username)).findFirst().orElse(null);
     }
-
-    public Set<User> getUserSet() {
+    public TreeSet<User> getUserSet() {
         return userSet;
     }
 
-    public void setUserSet(Set<User> userSet) {
+    public void setUserSet(TreeSet<User> userSet) {
         this.userSet = userSet;
     }
 

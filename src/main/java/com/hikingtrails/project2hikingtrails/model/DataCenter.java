@@ -3,21 +3,20 @@ package com.hikingtrails.project2hikingtrails.model;
 import com.hikingtrails.project2hikingtrails.util.BackUp;
 
 import java.io.Serializable;
-import java.util.LinkedList;
 
 public class DataCenter implements Serializable {
 
     private static DataCenter instance = null;
 
     private User currentUser;
-    private UserSetContainer userSetContainer;
-    private UserSearchTree userSearchTree;
-    private TrailSetContainer trailSetContainer;
+    private UserTreeSet userTreeSet;
+    private UserTreeMap userTreeMap;
+    private TrailHashMap trailHashMap;
 
     private DataCenter() {
-        userSetContainer = new UserSetContainer();
-        userSearchTree = new UserSearchTree();
-        trailSetContainer = new TrailSetContainer();
+        userTreeSet = new UserTreeSet();
+        userTreeMap = new UserTreeMap();
+        trailHashMap = new TrailHashMap();
     }
 
     public static DataCenter getInstance() {
@@ -36,30 +35,30 @@ public class DataCenter implements Serializable {
         BackUp.saveData();
     }
 
-    public void setUserSetContainer(UserSetContainer userSetContainer) {
-        this.userSetContainer = userSetContainer;
+    public void setUserTreeSet(UserTreeSet userTreeSet) {
+        this.userTreeSet = userTreeSet;
         BackUp.saveData();
     }
 
-    public UserSetContainer getUserSetContainer() {
-        return userSetContainer;
+    public UserTreeSet getUserTreeSet() {
+        return userTreeSet;
     }
 
-    public UserSearchTree getUserSearchTree() {
-        return userSearchTree;
+    public UserTreeMap getUserTreeMap() {
+        return userTreeMap;
     }
 
-    public void setUserSearchTree(UserSearchTree userSearchTree) {
-        this.userSearchTree = userSearchTree;
+    public void setUserTreeMap(UserTreeMap userTreeMap) {
+        this.userTreeMap = userTreeMap;
         BackUp.saveData();
     }
 
-    public TrailSetContainer getTrailSetContainer() {
-        return trailSetContainer;
+    public TrailHashMap getTrailHashMap() {
+        return trailHashMap;
     }
 
-    public void setTrailSetContainer(TrailSetContainer trailSetContainer) {
-        this.trailSetContainer = trailSetContainer;
+    public void setTrailHashMap(TrailHashMap trailHashMap) {
+        this.trailHashMap = trailHashMap;
         BackUp.saveData();
     }
 }

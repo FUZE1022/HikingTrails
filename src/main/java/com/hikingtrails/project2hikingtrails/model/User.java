@@ -6,14 +6,24 @@ import java.util.Objects;
 public class User implements Serializable, Comparable<User> {
     private String username, password, phoneNumber, profilePicture, followers, following;
     private HikingHistory hikingHistory;
-    private ReviewSetContainer reviews;
+    private UserReviewsTreeMap reviews;
+    private boolean isAdmin = false;
+
+    public User(String username, String password) {
+        this(username, password, "", "", null, "", "", null);
+    }
 
     public User(String username, String password, String phoneNumber, String profilePicture) {
         this(username, password, phoneNumber, profilePicture, null, "", "", null);
     }
 
+    public User(Admin admin) {
+        this(admin.getUsername(), admin.getPassword(), admin.getPhoneNumber(), admin.getProfilePicture(),
+                admin.getHikingHistory(), admin.getFollowers(), admin.getFollowing(), admin.getReviews());
+    }
+
     public User(String username, String password, String phoneNumber, String profilePicture, HikingHistory hikingHistory,
-                String followers, String following, ReviewSetContainer reviews) {
+                String followers, String following, UserReviewsTreeMap reviews) {
         this.username = username;
         this.password = password;
         this.phoneNumber = phoneNumber;
@@ -52,8 +62,12 @@ public class User implements Serializable, Comparable<User> {
         return following;
     }
 
-    public ReviewSetContainer getReviews() {
+    public UserReviewsTreeMap getReviews() {
         return reviews;
+    }
+
+    public boolean getIsAdmin() {
+        return isAdmin;
     }
 
     @Override

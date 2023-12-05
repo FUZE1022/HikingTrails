@@ -2,8 +2,8 @@ package com.hikingtrails.project2hikingtrails.controller;
 
 import com.hikingtrails.project2hikingtrails.model.DataCenter;
 import com.hikingtrails.project2hikingtrails.model.User;
-import com.hikingtrails.project2hikingtrails.model.UserSearchTree;
-import com.hikingtrails.project2hikingtrails.model.UserSetContainer;
+import com.hikingtrails.project2hikingtrails.model.UserTreeMap;
+import com.hikingtrails.project2hikingtrails.model.UserTreeSet;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 
@@ -33,8 +33,8 @@ public class NewUserController {
             inValidAccount6, inValidAccount7;
     private FileChooser fileChooser;
     private File file;
-    private UserSetContainer userSetContainer = DataCenter.getInstance().getUserSetContainer();
-    private UserSearchTree userSearchTree = DataCenter.getInstance().getUserSearchTree();
+    private UserTreeSet userTreeSet = DataCenter.getInstance().getUserTreeSet();
+    private UserTreeMap userTreeMap = DataCenter.getInstance().getUserTreeMap();
     public void initialize() {
         fileChooser = new FileChooser();
         fileChooser.getExtensionFilters().addAll(
@@ -44,7 +44,7 @@ public class NewUserController {
     }
 
     public void createAccount() {
-        UserSearchTree userTree = new UserSearchTree();
+        UserTreeMap userTree = new UserTreeMap();
         Dialog<ButtonType> dialog = new Dialog<>();
         dialog.setTitle("Confirmation");
         dialog.setHeaderText("Is this the user you'd like to create?");
@@ -59,9 +59,9 @@ public class NewUserController {
         try {
             dialog.showAndWait().ifPresent(buttonType -> {
                 if (buttonType == yesButton) {
-                    userSetContainer.addUserToSet(new User(usernameTf.getText(), passwordTf.getText(),
+                    userTreeSet.addUserToSet(new User(usernameTf.getText(), passwordTf.getText(),
                             phoneNumTf.getText(), file.toURI().toString()));
-                    userSearchTree.addUser(new User(usernameTf.getText(), passwordTf.getText(), phoneNumTf.getText(),
+                    userTreeMap.addUser(new User(usernameTf.getText(), passwordTf.getText(), phoneNumTf.getText(),
                             file.toURI().toString()));
                     Alert successAlert = new Alert(Alert.AlertType.INFORMATION);
                     successAlert.setTitle("Success");
@@ -103,7 +103,7 @@ public class NewUserController {
     public void usernameOnTyped() {
         String username = usernameTf.getText();
 
-        boolean isTaken = userSetContainer.containsUsernameInSet(username);
+        boolean isTaken = userTreeSet.containsUsernameInSet(username);
         boolean showError = isTaken;
 
         inValidUsername.setVisible(showError);
@@ -134,7 +134,7 @@ public class NewUserController {
         String phone = phoneNumTf.getText();
         boolean isLengthValid = phone.length() == 10;
         boolean hasNumber = phone.matches("[0-9]+");
-        boolean isTaken = userSetContainer.containsUserNumberInSet(phone);
+        boolean isTaken = userTreeSet.containsUserNumberInSet(phone);
 
         boolean showError = !isLengthValid || !hasNumber || isTaken;
 

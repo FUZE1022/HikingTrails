@@ -5,10 +5,12 @@ import java.util.Objects;
 
 public class Trail implements Serializable, Comparable<Trail> {
     private String name, headAddress, elevationGain, length, difficulty, type;
-    private Review reviews;
+    private Integer id;
+    private static int uID = 0;
+    private TrailReviewTreeMap reviews;
 
     public Trail(String name, String headAddress, String length, String elevationGain, String difficulty, String type
-            ,Review reviews) {
+            ,TrailReviewTreeMap reviews) {
         this.name = name;
         this.headAddress = headAddress;
         this.length = length;
@@ -16,6 +18,8 @@ public class Trail implements Serializable, Comparable<Trail> {
         this.difficulty = difficulty;
         this.type = type;
         this.reviews = reviews;
+        this.id = uID;
+        incID();
     }
 
     public String getName() {
@@ -42,14 +46,23 @@ public class Trail implements Serializable, Comparable<Trail> {
         return type;
     }
 
-    public Review getReviews() {
+    public TrailReviewTreeMap getReviews() {
         return reviews;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void incID() {
+        uID++;
     }
 
     @Override
     public String toString() {
         return "Trail{" +
-                "name='" + name + '\'' +
+                "id='" + id + '\'' +
+                ", name='" + name + '\'' +
                 ", headAddress='" + headAddress + '\'' +
                 ", length='" + length + '\'' +
                 ", elevationGain='" + elevationGain + '\'' +
@@ -67,16 +80,16 @@ public class Trail implements Serializable, Comparable<Trail> {
         return Objects.equals(name, trail.name) && Objects.equals(headAddress, trail.headAddress) &&
                 Objects.equals(length, trail.length) && Objects.equals(elevationGain, trail.elevationGain) &&
                 Objects.equals(difficulty, trail.difficulty) && Objects.equals(type, trail.type) &&
-                Objects.equals(reviews, trail.reviews);
+                Objects.equals(reviews, trail.reviews) && Objects.equals(id, trail.id);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(name, headAddress, length, elevationGain, difficulty, type, reviews);
+        return Objects.hash(name, headAddress, length, elevationGain, difficulty, type, reviews, id);
     }
 
     @Override
     public int compareTo(Trail o) {
-        return this.name.compareTo(o.name);
+        return this.id.compareTo(o.id);
     }
 }

@@ -1,9 +1,8 @@
 package com.hikingtrails.project2hikingtrails.controller;
 
 import com.hikingtrails.project2hikingtrails.model.DataCenter;
-import com.hikingtrails.project2hikingtrails.model.TrailSetContainer;
-import com.hikingtrails.project2hikingtrails.model.UserSearchTree;
-import com.hikingtrails.project2hikingtrails.model.UserSetContainer;
+import com.hikingtrails.project2hikingtrails.model.UserTreeMap;
+import com.hikingtrails.project2hikingtrails.model.UserTreeSet;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -23,11 +22,11 @@ public class MainController {
     private Button loginBtn, exitBtn;
     @FXML
     private Hyperlink newUserHl;
-    private UserSetContainer userSetContainer = DataCenter.getInstance().getUserSetContainer();
-    private UserSearchTree userSearchTree = DataCenter.getInstance().getUserSearchTree();
+    private UserTreeSet userTreeSet = DataCenter.getInstance().getUserTreeSet();
+    private UserTreeMap userTreeMap = DataCenter.getInstance().getUserTreeMap();
     public void login(ActionEvent event) throws IOException {
-        if(userSearchTree.isValidUser(username.getText().trim(), passwordPf.getText().trim())){
-            DataCenter.getInstance().setCurrentUser(userSetContainer.getUser(username.getText().trim()));
+        if(userTreeMap.isValidUser(username.getText().trim(), passwordPf.getText().trim())) {
+            DataCenter.getInstance().setCurrentUser(userTreeSet.getUser(username.getText().trim()));
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/hikingtrails/project2hikingtrails/views" +
                     "/UserMainView.fxml"));
             Stage stage = new Stage();

@@ -3,7 +3,7 @@ package com.hikingtrails.project2hikingtrails.model;
 import java.io.Serializable;
 import java.util.Objects;
 
-public class Review implements Serializable {
+public class Review implements Serializable, Comparable<Review> {
     private String username, trailName, review, time, rating, comments, photos;
 
     public Review(String username, String trailName, String review, String time, String rating, String comments, String photos) {
@@ -71,5 +71,10 @@ public class Review implements Serializable {
     @Override
     public int hashCode() {
         return Objects.hash(username, trailName, review, time, rating, comments, photos);
+    }
+
+    @Override
+    public int compareTo(Review o) {
+        return this.getUsername().compareTo(o.getUsername());
     }
 }
