@@ -25,13 +25,16 @@ public class MainController {
     private UserTreeSet userTreeSet = DataCenter.getInstance().getUserTreeSet();
     private UserTreeMap userTreeMap = DataCenter.getInstance().getUserTreeMap();
     public void login(ActionEvent event) throws IOException {
-        if(userTreeMap.isValidUser(username.getText().trim(), passwordPf.getText().trim())) {
+//        if(username.getText().equalsIgnoreCase("Admin") && passwordPf.getText().equals("SCCC")) {
+//            System.out.println("Admin login");
+//            //TODO: Admin login
+//        }
+        if(userTreeMap.isValidUser(username.getText().trim(), passwordPf.getText())) {
             DataCenter.getInstance().setCurrentUser(userTreeSet.getUser(username.getText().trim()));
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/hikingtrails/project2hikingtrails/views" +
                     "/UserMainView.fxml"));
             Stage stage = new Stage();
             Scene newScene = new Scene(fxmlLoader.load(), 1180, 700);
-            //stage.initStyle(StageStyle.UNDECORATED);
             Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             currentStage.close();
             stage.setScene(newScene);

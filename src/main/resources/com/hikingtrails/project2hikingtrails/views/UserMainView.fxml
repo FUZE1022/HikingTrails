@@ -15,18 +15,11 @@
 <?import javafx.scene.text.Font?>
 <?import org.kordamp.ikonli.javafx.FontIcon?>
 
-<AnchorPane id="AnchorPane" prefHeight="700.0" prefWidth="1180.0" style="-fx-background-color: fff;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.hikingtrails.project2hikingtrails.controller.UserMainController">
+<AnchorPane prefHeight="700.0" prefWidth="1180.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.hikingtrails.project2hikingtrails.controller.UserMainController">
    <children>
       <Pane layoutY="-5.0" prefHeight="158.0" prefWidth="1180.0" style="-fx-background-color: #39A67F;" AnchorPane.bottomAnchor="548.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="-6.0">
          <children>
-            <ImageView fx:id="profilePictureIv" fitHeight="54.0" fitWidth="59.0" layoutX="14.0" layoutY="71.0" pickOnBounds="true" preserveRatio="true">
-               <effect>
-                  <DropShadow />
-               </effect>
-               <image>
-                  <Image url="@../images/blankProfilePicture.png" />
-               </image></ImageView>
-            <Label fx:id="userLbl" layoutX="75.0" layoutY="85.0" text="[Current User]" textFill="WHITE">
+            <Label fx:id="userLbl" layoutX="14.0" layoutY="81.0" text="[Current User]" textFill="WHITE">
                <font>
                   <Font name="Segoe UI Bold" size="16.0" />
                </font>
@@ -58,16 +51,16 @@
                   <DropShadow />
                </effect>
             </Label>
-            <ImageView fitHeight="30.0" fitWidth="25.0" layoutX="1061.0" layoutY="47.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="searchUserIv" fitHeight="30.0" fitWidth="25.0" layoutX="1061.0" layoutY="47.0" onMouseClicked="#searchUser" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../images/m2i8G6H7d3d3H7K9.png" />
                </image>
             </ImageView>
          </children>
       </Pane>
-      <VBox layoutY="158.0" prefHeight="310.0" prefWidth="176.0" style="-fx-background-color: white;" AnchorPane.bottomAnchor="232.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="1004.0" AnchorPane.topAnchor="158.0">
+      <VBox layoutY="158.0" prefHeight="195.0" prefWidth="176.0" style="-fx-background-color: white;" AnchorPane.bottomAnchor="347.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="1004.0" AnchorPane.topAnchor="158.0">
          <children>
-            <Button fx:id="homeBtn" mnemonicParsing="false" onAction="#homeOnAction" prefHeight="48.0" prefWidth="170.0" style="-fx-background-color: #fff;" text="Home">
+            <Button fx:id="homeBtn" mnemonicParsing="false" onAction="#homeOnAction" prefHeight="48.0" prefWidth="170.0" style="-fx-background-color: #fff;" styleClass="button" text="Home">
                <graphic>
                   <FontIcon iconLiteral="fas-home" />
                </graphic></Button>
@@ -75,10 +68,18 @@
                <graphic>
                   <FontIcon iconLiteral="far-map" wrappingWidth="15.0" />
                </graphic></Button>
-            <Button mnemonicParsing="false" prefHeight="48.0" prefWidth="176.0" style="-fx-background-color: fff;" text="Button" />
+            <Button fx:id="hikingBtn" mnemonicParsing="false" onAction="#hikingOnAction" prefHeight="48.0" prefWidth="176.0" style="-fx-background-color: fff;" text="Hiking">
+               <graphic>
+                  <FontIcon iconLiteral="fas-hiking" />
+               </graphic>
+            </Button>
             <Button fx:id="profileBtn" mnemonicParsing="false" onAction="#profileOnAction" prefHeight="48.0" prefWidth="176.0" style="-fx-background-color: fff;" text="Profile">
                <graphic>
                   <FontIcon iconLiteral="far-user" />
+               </graphic></Button>
+            <Button fx:id="adminBtn" mnemonicParsing="false" prefHeight="48.0" prefWidth="176.0" style="-fx-background-color: fff;" text="Admin" visible="false">
+               <graphic>
+                  <FontIcon iconLiteral="far-clipboard" />
                </graphic></Button>
          </children>
       </VBox>

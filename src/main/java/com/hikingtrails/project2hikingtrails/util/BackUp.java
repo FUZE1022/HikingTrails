@@ -1,7 +1,7 @@
 package com.hikingtrails.project2hikingtrails.util;
 
 import com.hikingtrails.project2hikingtrails.model.DataCenter;
-import com.hikingtrails.project2hikingtrails.model.TrailHashMap;
+import com.hikingtrails.project2hikingtrails.model.TrailTreeSet;
 import com.hikingtrails.project2hikingtrails.model.UserTreeMap;
 import com.hikingtrails.project2hikingtrails.model.UserTreeSet;
 
@@ -28,8 +28,8 @@ public final class BackUp {
             DataCenter.getInstance().setUserTreeSet(userTreeSet);
             UserTreeMap userTreeMap = new UserTreeMap();
             DataCenter.getInstance().setUserTreeMap(userTreeMap);
-            TrailHashMap trailHashMap = new TrailHashMap();
-            DataCenter.getInstance().setTrailHashMap(trailHashMap);
+            TrailTreeSet trailTreeSet = new TrailTreeSet();
+            DataCenter.getInstance().setTrailTreeSet(trailTreeSet);
             saveData();
             return;
         }
@@ -38,11 +38,11 @@ public final class BackUp {
                     (UserTreeSet) Serializer.deserializeFromFile(BACKUP_USERS_FILE_PATH);
             UserTreeMap loadUserTreeMap =
                     (UserTreeMap) Serializer.deserializeFromFile(BACKUP_USERSTREE_FILE_PATH);
-            TrailHashMap loadTrailHashMap =
-                    (TrailHashMap) Serializer.deserializeFromFile(BACKUP_TRAILS_FILE_PATH);
+            TrailTreeSet loadTrailTreeSet =
+                    (TrailTreeSet) Serializer.deserializeFromFile(BACKUP_TRAILS_FILE_PATH);
             DataCenter.getInstance().setUserTreeSet(loadUserTreeSet);
             DataCenter.getInstance().setUserTreeMap(loadUserTreeMap);
-            DataCenter.getInstance().setTrailHashMap(loadTrailHashMap);
+            DataCenter.getInstance().setTrailTreeSet(loadTrailTreeSet);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -52,7 +52,7 @@ public final class BackUp {
         try{
             Serializer.serializeToFile(DataCenter.getInstance().getUserTreeSet(), BACKUP_USERS_FILE_PATH);
             Serializer.serializeToFile(DataCenter.getInstance().getUserTreeMap(), BACKUP_USERSTREE_FILE_PATH);
-            Serializer.serializeToFile(DataCenter.getInstance().getTrailHashMap(), BACKUP_TRAILS_FILE_PATH);
+            Serializer.serializeToFile(DataCenter.getInstance().getTrailTreeSet(), BACKUP_TRAILS_FILE_PATH);
         } catch(Exception e) {
             e.printStackTrace();
         }

@@ -1,21 +1,21 @@
-.text-field {
-    -fx-background-color: #f2f2f2; /* Light gray background color */
-    -fx-padding: 10px; /* Add some padding */
-    -fx-border-color: #ccc; /* Border color */
-    -fx-border-width: 1px; /* Border width */
-    -fx-font-size: 14px; /* Font size */
-}
+/*.text-field {*/
+/*    -fx-background-color: #f2f2f2; !* Light gray background color *!*/
+/*    -fx-padding: 10px; !* Add some padding *!*/
+/*    -fx-border-color: #ccc; !* Border color *!*/
+/*    -fx-border-width: 1px; !* Border width *!*/
+/*    -fx-font-size: 14px; !* Font size *!*/
+/*}*/
 
-.button {
-    -fx-background-color: #4CAF50; /* Green background color */
-    -fx-text-fill: white; /* White text color */
-    -fx-font-size: 16px; /* Font size */
-    -fx-padding: 10px 20px; /* Padding */
-    -fx-border-radius: 5px; /* Border radius */
-    -fx-border-color: #45a049; /* Border color */
-    -fx-border-width: 2px; /* Border width */
-}
+/*.button {*/
+/*    -fx-background-color: #4CAF50; !* Green background color *!*/
+/*    -fx-text-fill: white; !* White text color *!*/
+/*    -fx-font-size: 16px; !* Font size *!*/
+/*    -fx-padding: 10px 20px; !* Padding *!*/
+/*    -fx-border-radius: 5px; !* Border radius *!*/
+/*    -fx-border-color: #45a049; !* Border color *!*/
+/*    -fx-border-width: 2px; !* Border width *!*/
+/*}*/
 
 .button:hover {
-    -fx-background-color: #45a049; /* Darker green background color on hover */
+    -fx-background-color: #000000; /* Darker green background color on hover */
 }

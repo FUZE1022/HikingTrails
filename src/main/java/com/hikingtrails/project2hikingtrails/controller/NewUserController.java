@@ -1,13 +1,11 @@
 package com.hikingtrails.project2hikingtrails.controller;
 
-import com.hikingtrails.project2hikingtrails.model.DataCenter;
-import com.hikingtrails.project2hikingtrails.model.User;
-import com.hikingtrails.project2hikingtrails.model.UserTreeMap;
-import com.hikingtrails.project2hikingtrails.model.UserTreeSet;
+import com.hikingtrails.project2hikingtrails.model.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -19,13 +17,15 @@ import javafx.stage.StageStyle;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
 
-public class NewUserController {
+public class NewUserController implements Initializable {
 
     @FXML
     private TextField usernameTf, passwordTf, phoneNumTf;
     @FXML
-    private Button createAccountBtn, profilePictureChooserBtn, goBackBtn;
+    private Button createAccountBtn, profilePictureChooserBtn, goBackBtn, testBtn;
     @FXML
     private ImageView profilePictureIv;
     @FXML
@@ -35,12 +35,18 @@ public class NewUserController {
     private File file;
     private UserTreeSet userTreeSet = DataCenter.getInstance().getUserTreeSet();
     private UserTreeMap userTreeMap = DataCenter.getInstance().getUserTreeMap();
-    public void initialize() {
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
         fileChooser = new FileChooser();
         fileChooser.getExtensionFilters().addAll(
                 new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg")
         );
         fileChooser.setInitialDirectory(new File("savedProfilePictures"));
+    }
+
+    public void test() {
+        RootAdmin rootAdmin = new RootAdmin();
+        //rootAdmin.promoteToAdmin();
     }
 
     public void createAccount() {

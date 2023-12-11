@@ -1,7 +1,6 @@
 package com.hikingtrails.project2hikingtrails.controller;
 
-import com.hikingtrails.project2hikingtrails.model.DataCenter;
-import com.hikingtrails.project2hikingtrails.model.User;
+import com.hikingtrails.project2hikingtrails.model.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -9,6 +8,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -31,18 +31,23 @@ public class UserMainController implements Initializable {
     @FXML
     private Label userLbl;
     @FXML
-    private Button exitBtn, backBtn, homeBtn, profileBtn, trailsBtn;
+    private Button exitBtn, backBtn, homeBtn, profileBtn, trailsBtn, adminBtn, hikingBtn;
     @FXML
-    private ImageView profilePictureIv;
+    private ImageView searchUserIv;
     @FXML
     private TextField userSearchTf;
 
     private User currentUser = DataCenter.getInstance().getCurrentUser();
+    private UserTreeSet userTreeSet = DataCenter.getInstance().getUserTreeSet();
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         userLbl.setText(currentUser.getUsername());
-        profilePictureIv.setImage(new Image(currentUser.getProfilePicture()));
+//        if(currentUser.getIsAdmin())
+////            adminBtn.setVisible(true);
+//        RootAdmin rootAdmin = new RootAdmin();
+//        rootAdmin.promoteToAdmin(currentUser);
+//        System.out.println(currentUser.getIsAdmin());
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/hikingtrails/project2hikingtrails/views" +
                 "/UserHomeView.fxml"));
@@ -101,6 +106,33 @@ public class UserMainController implements Initializable {
                 node.setVisible(false);
                 node.setManaged(false);
             }
+        }
+    }
+
+    public void hikingOnAction(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/hikingtrails/project2hikingtrails/views/" +
+                "UserHikingView.fxml"));
+        Parent newSceneRoot = loader.load();
+        stackPane.getChildren().add(newSceneRoot);
+        newSceneRoot.toFront();
+        for (Node node : stackPane.getChildren()) {
+            if (node != newSceneRoot) {
+                node.setVisible(false);
+                node.setManaged(false);
+            }
+        }
+    }
+
+    public void searchUser() {
+        String username = userSearchTf.getText().trim();
+        if(userTreeSet.getUser(username) != null && !username.equalsIgnoreCase(currentUser.getUsername()))
+            System.out.println("User found");
+        else {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText(null);
+            alert.setContentText("User not found or Username can not be your own!");
+            alert.showAndWait();
         }
     }
 

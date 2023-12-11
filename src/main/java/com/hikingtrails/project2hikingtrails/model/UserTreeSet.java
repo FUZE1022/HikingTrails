@@ -19,10 +19,11 @@ public class UserTreeSet implements Serializable {
 
     public void removeUserFromSet(User user) {
         userSet.remove(user);
+        BackUp.saveData();
     }
 
     public boolean containsUsernameInSet(String username) {
-        return userSet.stream().anyMatch(user -> user.getUsername().equalsIgnoreCase(username));
+        return userSet.contains(new User(username, ""));
     }
 
     public boolean containsUserNumberInSet(String phoneNumber) {
@@ -30,7 +31,7 @@ public class UserTreeSet implements Serializable {
     }
 
     public User getUser(String username) {
-        return userSet.stream().filter(user -> user.getUsername().equals(username)).findFirst().orElse(null);
+        return userSet.ceiling(new User(username, ""));
     }
     public TreeSet<User> getUserSet() {
         return userSet;
@@ -52,6 +53,4 @@ public class UserTreeSet implements Serializable {
                 "userSet=" + userSet +
                 '}';
     }
-
-
 }

@@ -11,12 +11,12 @@ public class DataCenter implements Serializable {
     private User currentUser;
     private UserTreeSet userTreeSet;
     private UserTreeMap userTreeMap;
-    private TrailHashMap trailHashMap;
+    private TrailTreeSet trailTreeSet;
 
     private DataCenter() {
         userTreeSet = new UserTreeSet();
         userTreeMap = new UserTreeMap();
-        trailHashMap = new TrailHashMap();
+        trailTreeSet = new TrailTreeSet();
     }
 
     public static DataCenter getInstance() {
@@ -53,12 +53,12 @@ public class DataCenter implements Serializable {
         BackUp.saveData();
     }
 
-    public TrailHashMap getTrailHashMap() {
-        return trailHashMap;
+    public TrailTreeSet getTrailTreeSet() {
+        return trailTreeSet;
     }
 
-    public void setTrailHashMap(TrailHashMap trailHashMap) {
-        this.trailHashMap = trailHashMap;
+    public void setTrailTreeSet(TrailTreeSet trailTreeSet) {
+        this.trailTreeSet = trailTreeSet;
         BackUp.saveData();
     }
 }

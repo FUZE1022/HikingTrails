@@ -19,6 +19,7 @@ public class UserTreeMap implements Serializable {
 
     public void removeUser(User user) {
         userTreeMap.remove(user.getUsername());
+        BackUp.saveData();
     }
 
     public boolean containsUser(String username) {

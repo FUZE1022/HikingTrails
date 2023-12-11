@@ -3,16 +3,20 @@ package com.hikingtrails.project2hikingtrails.model;
 import java.io.Serializable;
 import java.util.Objects;
 
-public class Review implements Serializable, Comparable<Review> {
-    private String username, trailName, review, time, rating, comments, photos;
+public class Review implements Serializable {
+    private String username, trailName, review, time, date ,rating, photos;
 
-    public Review(String username, String trailName, String review, String time, String rating, String comments, String photos) {
+    private CommentLinkedList comments;
+
+    public Review(String username, String trailName, String review, String time, String date, String rating,
+                  String photos) {
         this.username = username;
         this.trailName = trailName;
         this.review = review;
         this.time = time;
+        this.date = date;
         this.rating = rating;
-        this.comments = comments;
+        this.comments = new CommentLinkedList();
         this.photos = photos;
     }
 
@@ -32,11 +36,15 @@ public class Review implements Serializable, Comparable<Review> {
         return time;
     }
 
+    public String getDate() {
+        return date;
+    }
+
     public String getRating() {
         return rating;
     }
 
-    public String getComments() {
+    public CommentLinkedList getComments() {
         return comments;
     }
 
@@ -51,9 +59,10 @@ public class Review implements Serializable, Comparable<Review> {
                 ", trailName='" + trailName + '\'' +
                 ", review='" + review + '\'' +
                 ", time='" + time + '\'' +
+                ", date='" + date + '\'' +
                 ", rating='" + rating + '\'' +
-                ", comments='" + comments + '\'' +
                 ", photos='" + photos + '\'' +
+                ", comments=" + comments +
                 '}';
     }
 
@@ -71,10 +80,5 @@ public class Review implements Serializable, Comparable<Review> {
     @Override
     public int hashCode() {
         return Objects.hash(username, trailName, review, time, rating, comments, photos);
-    }
-
-    @Override
-    public int compareTo(Review o) {
-        return this.getUsername().compareTo(o.getUsername());
     }
 }

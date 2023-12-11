@@ -1,10 +1,67 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="592.0" prefWidth="1018.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane prefHeight="592.0" prefWidth="1018.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.hikingtrails.project2hikingtrails.controller.UserProfileController">
    <children>
       <Pane prefHeight="44.0" prefWidth="1018.0" style="-fx-background-color: #39A67F;" />
+      <ImageView fx:id="profilePictureIv" fitHeight="115.0" fitWidth="133.0" layoutX="437.0" layoutY="58.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/blankProfilePicture.png" />
+         </image>
+      </ImageView>
+      <Line endX="-25.0" endY="104.0" layoutX="462.0" layoutY="67.0" startX="-25.0" startY="-8.0" />
+      <Line endX="14.0" layoutX="538.0" layoutY="58.0" startX="-100.0" />
+      <Line endX="27.0" endY="1.0" layoutX="525.0" layoutY="172.0" startX="-88.5" startY="-0.5" />
+      <Line endX="10.5" endY="59.0" layoutX="542.0" layoutY="113.0" startX="10.5" startY="-55.0" />
+      <TextField fx:id="profileUsernameTf" disable="true" editable="false" layoutX="180.0" layoutY="61.0" prefHeight="25.0" prefWidth="127.0" />
+      <TextField fx:id="profilePasswordTf" disable="true" layoutX="180.0" layoutY="104.0" onKeyTyped="#profilePasswordOnTyped" prefHeight="25.0" prefWidth="127.0" />
+      <TextField fx:id="profilePhoneTf" disable="true" layoutX="180.0" layoutY="149.0" onKeyTyped="#profilePhoneOnTyped" prefHeight="25.0" prefWidth="127.0" />
+      <Button fx:id="editPasswordBtn" layoutX="315.0" layoutY="104.0" mnemonicParsing="false" onAction="#editPassword" text="Edit" />
+      <Button fx:id="editPhoneBtn" layoutX="315.0" layoutY="149.0" mnemonicParsing="false" onAction="#editPhone" text="Edit" />
+      <Button fx:id="editProfilePicBtn" layoutX="464.0" layoutY="184.0" mnemonicParsing="false" onAction="#editProfilePic" prefHeight="25.0" prefWidth="62.0" text="Edit" />
+      <TableView fx:id="hikingHistoryTv" layoutX="146.0" layoutY="218.0" prefHeight="200.0" prefWidth="697.0">
+        <columns>
+          <TableColumn fx:id="hikingHistoryTrailNameTc" prefWidth="172.0" text="Trail Name" />
+          <TableColumn fx:id="hikingHistoryStartTimeTc" prefWidth="76.0" text="Start Time" />
+            <TableColumn fx:id="hikingHistoryEndTimeTc" prefWidth="67.0" text="End Time" />
+            <TableColumn fx:id="hikingHistoryStartDateTc" prefWidth="78.0" text="Start Date" />
+            <TableColumn fx:id="hikingHistoryEndDateTc" prefWidth="79.0" text="End Date" />
+            <TableColumn fx:id="hikingHistoryDistanceTc" prefWidth="74.0" text="Distance" />
+            <TableColumn fx:id="hikingHistoryDurationTc" prefWidth="73.0" text="Duration" />
+            <TableColumn fx:id="hikingHistoryPaceTc" prefWidth="77.0" text="Pace" />
+        </columns>
+      </TableView>
+      <Hyperlink fx:id="followersHl" layoutX="614.0" layoutY="66.0" onAction="#showFollowers" text="Followers" />
+      <Hyperlink fx:id="followingHl" layoutX="682.0" layoutY="66.0" onAction="#showFollowing" text="Following" />
+      <Label fx:id="followersLbl" layoutX="640.0" layoutY="89.0" prefHeight="17.0" prefWidth="24.0" text="0" />
+      <Label fx:id="followingLbl" layoutX="709.0" layoutY="89.0" prefHeight="17.0" prefWidth="37.0" text="0" />
+      <Button fx:id="checkHistoryBtn" layoutX="619.0" layoutY="137.0" mnemonicParsing="false" onAction="#checkHistory" text="Check Hiking History" />
+      <Button fx:id="checkReviewAndCommentsBtn" layoutX="585.0" layoutY="184.0" mnemonicParsing="false" onAction="#checkReviewAndComments" text="Check All Reviews And Comments" />
+      <ImageView fx:id="hikingHistoryIv" fitHeight="150.0" fitWidth="200.0" layoutX="215.0" layoutY="428.0" pickOnBounds="true" />
+      <TextArea fx:id="hikingHistoryCommentTa" editable="false" layoutX="530.0" layoutY="428.0" prefHeight="150.0" prefWidth="268.0" visible="false" />
+      <Button fx:id="deleteHistoryBtn" layoutX="25.0" layoutY="271.0" mnemonicParsing="false" onAction="#deleteHistory" prefHeight="25.0" prefWidth="101.0" text="Delete History" />
+      <Button fx:id="checkImageAndCommentsBtn" layoutX="22.0" layoutY="333.0" mnemonicParsing="false" onAction="#checkImageAndComments" prefHeight="44.0" prefWidth="107.0" text="Check Image and Comments" wrapText="true" />
+      <Label layoutX="25.0" layoutY="197.0" prefHeight="69.0" prefWidth="107.0" text="Click the specific Row you would like to delete" wrapText="true" />
+      <Label layoutX="62.0" layoutY="308.0" text="Or" />
+      <Button fx:id="profilePasswordConfirmBtn" layoutX="315.0" layoutY="103.0" mnemonicParsing="false" onAction="#profilePasswordConfirm" prefHeight="26.0" prefWidth="62.0" text="Confirm" visible="false" />
+      <Button fx:id="profilePhoneConfirmBtn" layoutX="315.0" layoutY="148.0" mnemonicParsing="false" onAction="#profilePhoneConfirm" prefHeight="26.0" prefWidth="62.0" text="Confirm" visible="false" />
+      <Label fx:id="noPicturesLbl" layoutX="206.0" layoutY="476.0" prefHeight="17.0" prefWidth="101.0" text="No Pictures" visible="false">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

@@ -1,37 +1,40 @@
 package com.hikingtrails.project2hikingtrails.model;
 
+import com.hikingtrails.project2hikingtrails.util.BackUp;
+
 import java.io.Serializable;
 import java.util.Objects;
 
 public class User implements Serializable, Comparable<User> {
     private String username, password, phoneNumber, profilePicture, followers, following;
-    private HikingHistory hikingHistory;
-    private UserReviewsTreeMap reviews;
+    private HikingHistoryLinkedList hikingHistory;
+    private UserReviewsLinkedList reviews;
     private boolean isAdmin = false;
 
+
     public User(String username, String password) {
-        this(username, password, "", "", null, "", "", null);
+        this(username, password, "", "",  "", "");
     }
 
     public User(String username, String password, String phoneNumber, String profilePicture) {
-        this(username, password, phoneNumber, profilePicture, null, "", "", null);
+        this(username, password, phoneNumber, profilePicture, "", "");
     }
 
     public User(Admin admin) {
         this(admin.getUsername(), admin.getPassword(), admin.getPhoneNumber(), admin.getProfilePicture(),
-                admin.getHikingHistory(), admin.getFollowers(), admin.getFollowing(), admin.getReviews());
+                admin.getFollowers(), admin.getFollowing());
     }
 
-    public User(String username, String password, String phoneNumber, String profilePicture, HikingHistory hikingHistory,
-                String followers, String following, UserReviewsTreeMap reviews) {
+    public User(String username, String password, String phoneNumber, String profilePicture,
+                String followers, String following) {
         this.username = username;
         this.password = password;
         this.phoneNumber = phoneNumber;
         this.profilePicture = profilePicture;
-        this.hikingHistory = hikingHistory;
+        this.hikingHistory = new HikingHistoryLinkedList();
         this.followers = followers;
         this.following = following;
-        this.reviews = reviews;
+        this.reviews = new UserReviewsLinkedList();
     }
 
     public String getUsername() {
@@ -42,15 +45,30 @@ public class User implements Serializable, Comparable<User> {
         return password;
     }
 
+    public void setPassword(String password) {
+        this.password = password;
+        BackUp.saveData();
+    }
+
     public String getPhoneNumber() {
         return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+        BackUp.saveData();
     }
 
     public String getProfilePicture() {
         return profilePicture;
     }
 
-    public HikingHistory getHikingHistory() {
+    public void setProfilePicture(String profilePicture) {
+        this.profilePicture = profilePicture;
+        BackUp.saveData();
+    }
+
+    public HikingHistoryLinkedList getHikingHistory() {
         return hikingHistory;
     }
 
@@ -62,13 +80,14 @@ public class User implements Serializable, Comparable<User> {
         return following;
     }
 
-    public UserReviewsTreeMap getReviews() {
+    public UserReviewsLinkedList getReviews() {
         return reviews;
     }
 
     public boolean getIsAdmin() {
         return isAdmin;
     }
+
 
     @Override
     public String toString() {
@@ -100,6 +119,7 @@ public class User implements Serializable, Comparable<User> {
         return Objects.hash(username, password, phoneNumber, profilePicture, hikingHistory, followers, following,
                 reviews);
     }
+
 
     @Override
     public int compareTo(User o) {
