@@ -1,28 +1,29 @@
 package com.hikingtrails.project2hikingtrails.model;
 
+import java.io.Serializable;
 import java.util.Objects;
 
-public class Comment {
-    private String username, password;
+public class Comment implements Serializable {
+    private String username, comment;
 
-    public Comment(String username, String password) {
+    public Comment(String username, String comment) {
         this.username = username;
-        this.password = password;
+        this.comment =  comment;
     }
 
     public String getUsername() {
         return username;
     }
 
-    public String getPassword() {
-        return password;
+    public String getComment() {
+        return comment;
     }
 
     @Override
     public String toString() {
         return "Comment{" +
                 "username='" + username + '\'' +
-                ", password='" + password + '\'' +
+                ", comment='" + comment + '\'' +
                 '}';
     }
 
@@ -31,11 +32,11 @@ public class Comment {
         if (this == o) return true;
         if (!(o instanceof Comment)) return false;
         Comment user = (Comment) o;
-        return getUsername().equals(user.getUsername()) && getPassword().equals(user.getPassword());
+        return getUsername().equals(user.getUsername()) && getComment().equals(user.getComment());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getUsername(), getPassword());
+        return Objects.hash(getUsername(), getComment());
     }
 }

@@ -62,9 +62,10 @@
             <Font size="18.0" />
          </font>
       </Label>
-      <VBox layoutX="426.0" layoutY="414.0" spacing="25.0">
+      <VBox layoutX="428.0" layoutY="389.0" spacing="25.0">
          <children>
             <Button fx:id="seeReviewContentBtn" mnemonicParsing="false" onAction="#seeReviewContent" text="See Review Content" visible="false" />
+            <Button fx:id="writeCommentBtn" mnemonicParsing="false" onAction="#writeComment" prefHeight="25.0" prefWidth="122.0" text="Write Comment" visible="false" />
             <Button fx:id="seeCommentsBtn" mnemonicParsing="false" onAction="#seeComments" prefHeight="25.0" prefWidth="122.0" text="See Comments" visible="false" />
             <Button fx:id="followAuthorBtn" mnemonicParsing="false" onAction="#followAuthor" prefHeight="25.0" prefWidth="122.0" text="Follow Author?" visible="false" />
          </children>
@@ -74,11 +75,29 @@
       <Line fx:id="line5" endX="100.0" layoutX="663.0" layoutY="401.0" startX="-100.0" visible="false" />
       <Line fx:id="line6" endX="90.5" endY="-10.5" layoutX="673.0" layoutY="560.0" startX="90.0" startY="-158.5" visible="false" />
       <Line fx:id="line8" endX="90.5" endY="-10.5" layoutX="472.0" layoutY="559.0" startX="90.0" startY="-158.5" visible="false" />
-      <TextArea fx:id="reviewContentTa" layoutX="776.0" layoutY="396.0" prefHeight="158.0" prefWidth="228.0" visible="false" />
+      <TextArea fx:id="reviewContentTa" editable="false" layoutX="776.0" layoutY="396.0" prefHeight="158.0" prefWidth="228.0" visible="false" />
       <Label fx:id="noPicturesLbl" layoutX="609.0" layoutY="460.0" text="No Pictures" visible="false">
          <font>
             <Font size="21.0" />
          </font>
       </Label>
+      <Label fx:id="reviewLbl" layoutX="865.0" layoutY="368.0" text="Review" visible="false">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <TextArea fx:id="writeCommentTa" layoutX="581.0" layoutY="420.0" prefHeight="149.0" prefWidth="220.0" visible="false" wrapText="true" />
+      <Label fx:id="writeCommentLbl" layoutX="607.0" layoutY="385.0" text="Write you comment Here" visible="false">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+      <Button fx:id="postCommentBtn" layoutX="816.0" layoutY="478.0" mnemonicParsing="false" onAction="#postComment" prefHeight="26.0" prefWidth="102.0" text="Post Comment!" visible="false" />
+      <Label fx:id="commentLbl" layoutX="739.0" layoutY="363.0" text="Comments" visible="false">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Pane fx:id="paginationContainer" layoutX="632.0" layoutY="388.0" prefHeight="175.0" prefWidth="301.0" visible="false" AnchorPane.bottomAnchor="29.0" AnchorPane.leftAnchor="632.0" AnchorPane.rightAnchor="85.0" AnchorPane.topAnchor="388.0" />
    </children>
 </AnchorPane>

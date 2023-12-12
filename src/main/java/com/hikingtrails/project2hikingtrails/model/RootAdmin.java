@@ -1,6 +1,8 @@
 package com.hikingtrails.project2hikingtrails.model;
 
-public class RootAdmin {
+import java.io.Serializable;
+
+public class RootAdmin implements Serializable {
     private String username, password;
 
     public RootAdmin() {

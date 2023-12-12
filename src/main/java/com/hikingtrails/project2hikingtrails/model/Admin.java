@@ -1,6 +1,8 @@
 package com.hikingtrails.project2hikingtrails.model;
 
-public class Admin extends User{
+import java.io.Serializable;
+
+public class Admin extends User implements Serializable {
     private boolean isAdmin = true;
 
     public Admin(User user) {

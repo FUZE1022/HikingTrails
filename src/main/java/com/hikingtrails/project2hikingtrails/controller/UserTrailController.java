@@ -6,9 +6,13 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.Pane;
+import javafx.scene.layout.Priority;
+import javafx.scene.layout.VBox;
 import javafx.scene.shape.Line;
 import javafx.stage.FileChooser;
 
@@ -18,6 +22,7 @@ import java.util.ResourceBundle;
 import java.util.stream.Collectors;
 
 public class UserTrailController implements Initializable {
+    //TODO: Follow author
     @FXML
     private TableView<Trail> trailTV;
     @FXML
@@ -31,17 +36,19 @@ public class UserTrailController implements Initializable {
             trailComboBoxfilterByDifficulty, trailComboBoxfilterByType, trailReviewRatingCb;
     @FXML
     private Button filterBtn, trailWriteReviewBtn, trailCheckReviewBtn, trailReviewImageBtn, trailReviewPostBtn,
-            seeReviewContentBtn, seeCommentsBtn, followAuthorBtn;
+            seeReviewContentBtn, seeCommentsBtn, followAuthorBtn, writeCommentBtn, postCommentBtn;
     @FXML
     private TextField filterTf, trailReviewTimeTf, trailReviewDateTf;
     @FXML
-    private TextArea trailReviewReviewTa, reviewContentTa;
+    private TextArea trailReviewReviewTa, reviewContentTa, writeCommentTa;
     @FXML
     private ImageView trailReviewPhotoIv, reviewPictureIv;
     @FXML
     private Line line1, line2, line3, line4, line5, line6, line7, line8;
     @FXML
-    private Label reviewsLbl, noPicturesLbl;
+    private Label reviewsLbl, noPicturesLbl, reviewLbl, writeCommentLbl, commentLbl;
+    @FXML
+    private Pane paginationContainer;
 
     private ObservableList<String> filterListChoiceBox = FXCollections.observableArrayList("No Filter", "Name",
             "Length", "Elevation Gain", "Difficulty", "Type");
@@ -63,6 +70,7 @@ public class UserTrailController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         populateTableView();
+
         trailComboBoxfilter.setItems(filterListChoiceBox);
         trailReviewRatingCb.setItems(ratings);
 
@@ -82,18 +90,32 @@ public class UserTrailController implements Initializable {
             alert.showAndWait();
             return;
         } else {
-            trailReviewRatingCb.setVisible(true);
-            trailReviewTimeTf.setVisible(true);
-            trailReviewDateTf.setVisible(true);
-            trailReviewImageBtn.setVisible(true);
-            trailReviewPostBtn.setVisible(true);
-            trailReviewReviewTa.setVisible(true);
-            trailReviewPhotoIv.setVisible(true);
-            line1.setVisible(true);
-            line2.setVisible(true);
-            line3.setVisible(true);
-            line4.setVisible(true);
+            setVisibilityOfReview(true);
         }
+        setVisibilityWriteReview();
+    }
+
+    private void setVisibilityWriteReview(){
+        reviewsTv.setVisible(false);
+        seeReviewContentBtn.setVisible(false);
+        seeCommentsBtn.setVisible(false);
+        followAuthorBtn.setVisible(false);
+        writeCommentBtn.setVisible(false);
+        reviewsLbl.setVisible(false);
+        reviewContentTa.setVisible(false);
+        reviewPictureIv.setVisible(false);
+        line5.setVisible(false);
+        line6.setVisible(false);
+        line7.setVisible(false);
+        line8.setVisible(false);
+        noPicturesLbl.setVisible(false);
+        reviewLbl.setVisible(false);
+        writeCommentTa.setVisible(false);
+        postCommentBtn.setVisible(false);
+        writeCommentLbl.setVisible(false);
+        noPicturesLbl.setVisible(false);
+        paginationContainer.setVisible(false);
+        commentLbl.setVisible(false);
     }
 
     public void checkReviews() {
@@ -109,9 +131,25 @@ public class UserTrailController implements Initializable {
             seeReviewContentBtn.setVisible(true);
             seeCommentsBtn.setVisible(true);
             followAuthorBtn.setVisible(true);
+            writeCommentBtn.setVisible(true);
             reviewsLbl.setVisible(true);
             populateReviewTableView();
         }
+        setVisibilityOfReview(false);
+    }
+
+    private void setVisibilityOfReview(boolean bool) {
+        trailReviewRatingCb.setVisible(bool);
+        trailReviewTimeTf.setVisible(bool);
+        trailReviewDateTf.setVisible(bool);
+        trailReviewImageBtn.setVisible(bool);
+        trailReviewPostBtn.setVisible(bool);
+        trailReviewReviewTa.setVisible(bool);
+        trailReviewPhotoIv.setVisible(bool);
+        line1.setVisible(bool);
+        line2.setVisible(bool);
+        line3.setVisible(bool);
+        line4.setVisible(bool);
     }
 
     public void seeReviewContent() {
@@ -129,17 +167,124 @@ public class UserTrailController implements Initializable {
             line6.setVisible(true);
             line7.setVisible(true);
             line8.setVisible(true);
+            reviewLbl.setVisible(true);
+            writeCommentTa.setVisible(false);
+            postCommentBtn.setVisible(false);
+            writeCommentLbl.setVisible(false);
+            paginationContainer.setVisible(false);
+            commentLbl.setVisible(false);
+            reviewPictureIv.setImage(null);
+            noPicturesLbl.setVisible(false);
             Review review = reviewsTv.getSelectionModel().getSelectedItem();
             reviewContentTa.setText(review.getReview());
-            if(review.getPhotos() != null)
-                reviewPictureIv.setImage(new Image(review.getPhotos()));
-            else
+            if(review.getPhotos().equals("No Photo"))
                 noPicturesLbl.setVisible(true);
+            else
+                reviewPictureIv.setImage(new Image(review.getPhotos()));
+        }
+    }
+
+    public void writeComment() {
+        if(reviewsTv.getSelectionModel().getSelectedItem() == null) {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Error");
+            alert.setHeaderText(null);
+            alert.setContentText("Please select a review to write a comment for.");
+            alert.showAndWait();
+            return;
+        } else {
+            writeCommentTa.setVisible(true);
+            postCommentBtn.setVisible(true);
+            writeCommentLbl.setVisible(true);
+            reviewContentTa.setVisible(false);
+            reviewPictureIv.setVisible(false);
+            line5.setVisible(false);
+            line6.setVisible(false);
+            line7.setVisible(false);
+            line8.setVisible(false);
+            reviewLbl.setVisible(false);
+            paginationContainer.setVisible(false);
+            commentLbl.setVisible(false);
+            noPicturesLbl.setVisible(false);
+        }
+    }
+
+    public void postComment() {
+        if(writeCommentTa.getText() == null) {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Error");
+            alert.setHeaderText(null);
+            alert.setContentText("Please write a comment before posting.");
+            alert.showAndWait();
+            return;
+        } else {
+            Review review = reviewsTv.getSelectionModel().getSelectedItem();
+            review.getComments().addComment(new Comment(currentUser.getUsername(), writeCommentTa.getText()));
+            writeCommentTa.setText(null);
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Success");
+            alert.setHeaderText(null);
+            alert.setContentText("Comment posted successfully!");
+            alert.showAndWait();
         }
     }
 
     public void seeComments() {
+        if(reviewsTv.getSelectionModel().getSelectedItem() == null) {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Error");
+            alert.setHeaderText(null);
+            alert.setContentText("Please select a review to see the comments of.");
+            alert.showAndWait();
+            return;
+        } else {
+            reviewContentTa.setVisible(false);
+            reviewPictureIv.setVisible(false);
+            line5.setVisible(false);
+            line6.setVisible(false);
+            line7.setVisible(false);
+            line8.setVisible(false);
+            reviewLbl.setVisible(false);
+            writeCommentTa.setVisible(false);
+            postCommentBtn.setVisible(false);
+            writeCommentLbl.setVisible(false);
+            noPicturesLbl.setVisible(false);
+            Review review = reviewsTv.getSelectionModel().getSelectedItem();
+            CommentLinkedList comments = review.getComments();
+            Node paginationOrMessage = createPagination(comments);
+            paginationContainer.getChildren().clear();
+            paginationContainer.getChildren().add(paginationOrMessage);
+            if (paginationOrMessage instanceof Pagination) {
+                VBox.setVgrow(paginationOrMessage, Priority.ALWAYS);
+            }
+            paginationContainer.setVisible(true);
+            commentLbl.setVisible(true);
+        }
+    }
 
+    private Node createPagination(CommentLinkedList comments) {
+        if (comments.isEmpty()) {
+            return new Label("No Comments");
+        }
+        Pagination pagination = new Pagination(comments.size());
+        pagination.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
+        pagination.prefWidthProperty().bind(paginationContainer.widthProperty());
+        pagination.prefHeightProperty().bind(paginationContainer.heightProperty());
+        pagination.setPageFactory(pageIndex -> {
+            if (pageIndex >= comments.size()) {
+                return null;
+            } else {
+                Comment comment = comments.getPage(pageIndex);
+                VBox box = new VBox(5);
+                Label usernameLabel = new Label(comment.getUsername());
+                TextArea commentArea = new TextArea(comment.getComment());
+                commentArea.setEditable(false);
+                box.getChildren().addAll(usernameLabel, commentArea);
+                return box;
+            }
+        });
+
+        return pagination;
     }
 
     public void followAuthor() {
@@ -164,7 +309,7 @@ public class UserTrailController implements Initializable {
             photo = file.toURI().toString();
         else
             photo = "No Photo";
-        if (rating == null || time == null || date == null || review == null) {
+        if (rating == null || time == null || date == null || review == null || review.isEmpty()) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error");
             alert.setHeaderText(null);

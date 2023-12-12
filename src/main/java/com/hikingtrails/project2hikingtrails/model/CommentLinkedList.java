@@ -33,4 +33,16 @@ public class CommentLinkedList implements Serializable {
     public LinkedList<Comment> getCommentLinkedList() {
         return commentLinkedList;
     }
+
+    public Comment getPage(Integer pageIndex) {
+        return commentLinkedList.get(pageIndex);
+    }
+
+    public int size() {
+        return commentLinkedList.size();
+    }
+
+    public boolean isEmpty() {
+        return commentLinkedList.isEmpty();
+    }
 }
