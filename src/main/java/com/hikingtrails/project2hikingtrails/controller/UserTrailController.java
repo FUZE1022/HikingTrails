@@ -18,11 +18,11 @@ import javafx.stage.FileChooser;
 
 import java.io.File;
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
 import java.util.stream.Collectors;
 
 public class UserTrailController implements Initializable {
-    //TODO: Follow author
     @FXML
     private TableView<Trail> trailTV;
     @FXML
@@ -239,6 +239,8 @@ public class UserTrailController implements Initializable {
             alert.showAndWait();
             return;
         } else {
+            Review selectedReview = reviewsTv.getSelectionModel().getSelectedItem();
+            displayComments(selectedReview);
             reviewContentTa.setVisible(false);
             reviewPictureIv.setVisible(false);
             line5.setVisible(false);
@@ -250,42 +252,45 @@ public class UserTrailController implements Initializable {
             postCommentBtn.setVisible(false);
             writeCommentLbl.setVisible(false);
             noPicturesLbl.setVisible(false);
-            Review review = reviewsTv.getSelectionModel().getSelectedItem();
-            CommentLinkedList comments = review.getComments();
-            Node paginationOrMessage = createPagination(comments);
-            paginationContainer.getChildren().clear();
-            paginationContainer.getChildren().add(paginationOrMessage);
-            if (paginationOrMessage instanceof Pagination) {
-                VBox.setVgrow(paginationOrMessage, Priority.ALWAYS);
-            }
             paginationContainer.setVisible(true);
             commentLbl.setVisible(true);
         }
     }
 
-    private Node createPagination(CommentLinkedList comments) {
-        if (comments.isEmpty()) {
-            return new Label("No Comments");
-        }
-        Pagination pagination = new Pagination(comments.size());
-        pagination.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
+    private void displayComments(Review review) {
+        CommentLinkedList comments = review.getComments();
+        List<Comment> filteredComments = comments.getCommentLinkedList().stream()
+                .filter(comment -> !currentUser.getBlockTreeSet().isUserBlocked(comment.getUsername()))
+                .collect(Collectors.toList());
+
+        createPaginationForComments(filteredComments);
+    }
+
+    private void createPaginationForComments(List<Comment> comments) {
+        Pagination pagination = new Pagination(comments.isEmpty() ? 1 : comments.size());
+        pagination.setPageFactory(pageIndex -> createCommentPage(comments, pageIndex));
         pagination.prefWidthProperty().bind(paginationContainer.widthProperty());
         pagination.prefHeightProperty().bind(paginationContainer.heightProperty());
-        pagination.setPageFactory(pageIndex -> {
-            if (pageIndex >= comments.size()) {
-                return null;
-            } else {
-                Comment comment = comments.getPage(pageIndex);
-                VBox box = new VBox(5);
-                Label usernameLabel = new Label(comment.getUsername());
-                TextArea commentArea = new TextArea(comment.getComment());
-                commentArea.setEditable(false);
-                box.getChildren().addAll(usernameLabel, commentArea);
-                return box;
-            }
-        });
 
-        return pagination;
+        paginationContainer.getChildren().clear();
+        paginationContainer.getChildren().add(pagination);
+    }
+
+    private Node createCommentPage(List<Comment> comments, int pageIndex) {
+        VBox box = new VBox(10);
+        if (comments.isEmpty() || pageIndex < 0 || pageIndex >= comments.size()) {
+            Label noCommentsLabel = new Label("No Comments");
+            box.getChildren().add(noCommentsLabel);
+            return box;
+        }
+        Comment comment = comments.get(pageIndex);
+        Label usernameLabel = new Label(comment.getUsername());
+        TextArea commentArea = new TextArea(comment.getComment());
+        commentArea.setEditable(false);
+        commentArea.setWrapText(true);
+
+        box.getChildren().addAll(usernameLabel, commentArea);
+        return box;
     }
 
     public void followAuthor() {
@@ -299,7 +304,7 @@ public class UserTrailController implements Initializable {
         } else {
             Review review = reviewsTv.getSelectionModel().getSelectedItem();
             User user = DataCenter.getInstance().getUserTreeSet().getUser(review.getUsername());
-            if(currentUser.getFollowingTreeSet().containsFollowing(user)) {
+            if(currentUser.getFollowingTreeSet().containsFollowing(user.getUsername())) {
                 Alert alert = new Alert(Alert.AlertType.WARNING);
                 alert.setTitle("Error");
                 alert.setHeaderText(null);
@@ -313,10 +318,24 @@ public class UserTrailController implements Initializable {
                 alert.setContentText("You cannot follow yourself.");
                 alert.showAndWait();
                 return;
+            } else if (currentUser.getBlockTreeSet().isUserBlocked(user.getUsername())) {
+                Alert alert = new Alert(Alert.AlertType.WARNING);
+                alert.setTitle("Error");
+                alert.setHeaderText(null);
+                alert.setContentText("You cannot follow a user you have blocked.");
+                alert.showAndWait();
+                return;
+            } else if (user.getBlockTreeSet().isUserBlocked(currentUser.getUsername())) {
+                Alert alert = new Alert(Alert.AlertType.WARNING);
+                alert.setTitle("Error");
+                alert.setHeaderText(null);
+                alert.setContentText("You cannot follow a user who has blocked you.");
+                alert.showAndWait();
+                return;
             }
             else {
-                currentUser.getFollowingTreeSet().addFollowing(user);
-                user.getFollowersTreeSet().addFollower(currentUser);
+                currentUser.getFollowingTreeSet().addFollowing(user.getUsername());
+                user.getFollowersTreeSet().addFollower(currentUser.getUsername());
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("Success");
                 alert.setHeaderText(null);
@@ -579,13 +598,18 @@ public class UserTrailController implements Initializable {
     }
 
     private void populateReviewTableView() {
-        Trail trail = trailTV.getSelectionModel().getSelectedItem();
         reviewsTv.getItems().clear();
         reviewsUsernameTc.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getUsername()));
         reviewsTimeTc.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getTime()));
         reviewsDateTc.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getDate()));
         reviewsRatingTc.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getRating()));
-        reviewsTv.setItems(FXCollections.observableArrayList(trailTreeSet.getTrail(trail).getReviews().getTrailReviewLinkedList()));
+        Trail trail = trailTV.getSelectionModel().getSelectedItem();
+        List<Review> filteredReviews = trailTreeSet.getTrail(trail).getReviews()
+                .getTrailReviewLinkedList().stream()
+                .filter(review -> !currentUser.getBlockTreeSet().isUserBlocked(review.getUsername()))
+                .collect(Collectors.toList());
+
+        reviewsTv.setItems(FXCollections.observableArrayList(filteredReviews));
     }
 
     private ObservableList<Trail> filterListName(ObservableList<Trail> trailList, String name) {

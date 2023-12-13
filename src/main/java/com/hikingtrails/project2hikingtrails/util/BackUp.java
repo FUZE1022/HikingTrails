@@ -11,23 +11,24 @@ import java.nio.file.Paths;
 
 public final class BackUp {
     private static final String BACKUP_USERS_FILE_PATH = "backUp/users.dat";
-    private static final String BACKUP_USERSTREE_FILE_PATH = "backUp/usersTree.dat";
+    //private static final String BACKUP_USERSTREE_FILE_PATH = "backUp/usersTree.dat";
     private static final String BACKUP_TRAILS_FILE_PATH = "backUp/trails.dat";
     private BackUp() {}
     private static boolean seralizedFileExists() {
-        return Files.exists(Paths.get(BACKUP_USERS_FILE_PATH) ) && Files.exists(Paths.get(BACKUP_USERSTREE_FILE_PATH))
+        return Files.exists(Paths.get(BACKUP_USERS_FILE_PATH) ) /*&& Files.exists(Paths.get
+        (BACKUP_USERSTREE_FILE_PATH))*/
                 && Files.exists(Paths.get(BACKUP_TRAILS_FILE_PATH));
     }
 
     public static void loadData() {
         if (!seralizedFileExists()) {
             createFile(BACKUP_USERS_FILE_PATH);
-            createFile(BACKUP_USERSTREE_FILE_PATH);
+            //createFile(BACKUP_USERSTREE_FILE_PATH);
             createFile(BACKUP_TRAILS_FILE_PATH);
             UserTreeSet userTreeSet = new UserTreeSet();
             DataCenter.getInstance().setUserTreeSet(userTreeSet);
-            UserTreeMap userTreeMap = new UserTreeMap();
-            DataCenter.getInstance().setUserTreeMap(userTreeMap);
+            //UserTreeMap userTreeMap = new UserTreeMap();
+            //DataCenter.getInstance().setUserTreeMap(userTreeMap);
             TrailTreeSet trailTreeSet = new TrailTreeSet();
             DataCenter.getInstance().setTrailTreeSet(trailTreeSet);
             saveData();
@@ -36,12 +37,12 @@ public final class BackUp {
         try {
             UserTreeSet loadUserTreeSet =
                     (UserTreeSet) Serializer.deserializeFromFile(BACKUP_USERS_FILE_PATH);
-            UserTreeMap loadUserTreeMap =
-                    (UserTreeMap) Serializer.deserializeFromFile(BACKUP_USERSTREE_FILE_PATH);
+            //UserTreeMap loadUserTreeMap =
+                    //(UserTreeMap) Serializer.deserializeFromFile(BACKUP_USERSTREE_FILE_PATH);
             TrailTreeSet loadTrailTreeSet =
                     (TrailTreeSet) Serializer.deserializeFromFile(BACKUP_TRAILS_FILE_PATH);
             DataCenter.getInstance().setUserTreeSet(loadUserTreeSet);
-            DataCenter.getInstance().setUserTreeMap(loadUserTreeMap);
+            //DataCenter.getInstance().setUserTreeMap(loadUserTreeMap);
             DataCenter.getInstance().setTrailTreeSet(loadTrailTreeSet);
         } catch (Exception e) {
             e.printStackTrace();
@@ -51,7 +52,7 @@ public final class BackUp {
     public static void saveData() {
         try{
             Serializer.serializeToFile(DataCenter.getInstance().getUserTreeSet(), BACKUP_USERS_FILE_PATH);
-            Serializer.serializeToFile(DataCenter.getInstance().getUserTreeMap(), BACKUP_USERSTREE_FILE_PATH);
+            //Serializer.serializeToFile(DataCenter.getInstance().getUserTreeMap(), BACKUP_USERSTREE_FILE_PATH);
             Serializer.serializeToFile(DataCenter.getInstance().getTrailTreeSet(), BACKUP_TRAILS_FILE_PATH);
         } catch(Exception e) {
             e.printStackTrace();

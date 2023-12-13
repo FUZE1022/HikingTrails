@@ -12,6 +12,7 @@ public class User implements Serializable, Comparable<User> {
     private CommentLinkedList comments;
     private FollowersTreeSet followersTreeSet;
     private FollowingTreeSet followingTreeSet;
+    private BlockTreeSet blockTreeSet;
     private boolean isAdmin = false;
 
 
@@ -33,6 +34,7 @@ public class User implements Serializable, Comparable<User> {
         this.comments = new CommentLinkedList();
         this.followersTreeSet = new FollowersTreeSet();
         this.followingTreeSet = new FollowingTreeSet();
+        this.blockTreeSet = new BlockTreeSet();
     }
 
     public String getUsername() {
@@ -85,6 +87,9 @@ public class User implements Serializable, Comparable<User> {
     public FollowingTreeSet getFollowingTreeSet() {
         return followingTreeSet;
     }
+    public BlockTreeSet getBlockTreeSet() {
+        return blockTreeSet;
+    }
 
     public boolean getIsAdmin() {
         return isAdmin;
@@ -98,8 +103,6 @@ public class User implements Serializable, Comparable<User> {
                 ", password='" + password + '\'' +
                 ", phoneNumber='" + phoneNumber + '\'' +
                 ", profilePicture='" + profilePicture + '\'' +
-                ", hikingHistory='" + hikingHistory + '\'' +
-                ", reviews='" + reviews + '\'' +
                 '}';
     }
 
@@ -108,16 +111,19 @@ public class User implements Serializable, Comparable<User> {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         User user = (User) o;
-        return Objects.equals(username, user.username) && Objects.equals(password, user.password) &&
-                Objects.equals(phoneNumber, user.phoneNumber) && Objects.equals(profilePicture, user.profilePicture) &&
-                Objects.equals(hikingHistory, user.hikingHistory) && Objects.equals(reviews, user.reviews);
+        return isAdmin == user.isAdmin && Objects.equals(username, user.username) &&
+                Objects.equals(password, user.password) && Objects.equals(phoneNumber, user.phoneNumber) &&
+                Objects.equals(profilePicture, user.profilePicture) && Objects.equals(hikingHistory, user.hikingHistory)
+                && Objects.equals(reviews, user.reviews) && Objects.equals(comments, user.comments) &&
+                Objects.equals(followersTreeSet, user.followersTreeSet) &&
+                Objects.equals(followingTreeSet, user.followingTreeSet) && Objects.equals(blockTreeSet, user.blockTreeSet);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(username, password, phoneNumber, profilePicture, hikingHistory, reviews);
+        return Objects.hash(username, password, phoneNumber, profilePicture, hikingHistory, reviews, comments,
+                followersTreeSet, followingTreeSet, blockTreeSet, isAdmin);
     }
-
 
     @Override
     public int compareTo(User o) {

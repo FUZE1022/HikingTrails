@@ -23,27 +23,23 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class UserProfileController implements Initializable {
+public class UserFollowingProfileController implements Initializable {
     @FXML
-    private Button editPasswordBtn, editPhoneBtn, editProfilePicBtn, checkHistoryBtn,
-            checkReviewsAndCommentsBtn, deleteHistoryBtn, checkImageAndCommentsBtn, profilePhoneConfirmBtn,
-            profilePasswordConfirmBtn, showReviewContentBtn;
+    private Button checkHistoryBtn, checkReviewsAndCommentsBtn,  checkImageAndCommentsBtn, showReviewContentBtn,
+            goBackBtn;
     @FXML
-    private TextField profileUsernameTf, profilePasswordTf, profilePhoneTf;
+    private TextField profileUsernameTf;
     @FXML
     private TextArea hikingHistoryCommentTa, reviewTa;
     @FXML
     private ImageView hikingHistoryIv, profilePictureIv, reviewIv;
     @FXML
-    private Hyperlink followersHl, followingHl, blockedHl;
-    @FXML
-    private Label followersLbl, followingLbl, noPicturesLbl, checkHikingHistoryLbl1, checkHikingHistoryLbl2,
-            noPictureLbl, allReviewsLbl, allCommentsLbl, blockedLbl;
+    private Label followersLbl, followingLbl, noPicturesLbl, noPictureLbl, allReviewsLbl, allCommentsLbl, blockedLbl;
     @FXML
     private TableView<HikingHistory> hikingHistoryTv;
     @FXML
     private TableColumn<HikingHistory, String> hikingHistoryTrailNameTc, hikingHistoryStartTimeTc,
-    hikingHistoryEndTimeTc, hikingHistoryStartDateTc, hikingHistoryEndDateTc, hikingHistoryDistanceTc,
+            hikingHistoryEndTimeTc, hikingHistoryStartDateTc, hikingHistoryEndDateTc, hikingHistoryDistanceTc,
             hikingHistoryDurationTc, hikingHistoryPaceTc, hikingHistoryCommentsTc;
     @FXML
     private TableView<Review> profileReviewTv;
@@ -53,103 +49,25 @@ public class UserProfileController implements Initializable {
     @FXML
     private Pane commentPane;
 
-    private User currentUser = DataCenter.getInstance().getCurrentUser();
-    private HikingHistoryLinkedList hikingHistory = currentUser.getHikingHistory();
+    private User tempCurrentUser = DataCenter.getInstance().getTempCurrentUser();
+    private HikingHistoryLinkedList hikingHistory = tempCurrentUser.getHikingHistory();
     private FileChooser fileChooser;
     private File file;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        profileUsernameTf.setText(currentUser.getUsername());
-        profilePasswordTf.setText(currentUser.getPassword());
-        profilePhoneTf.setText(currentUser.getPhoneNumber());
-        profilePictureIv.setImage(new Image(currentUser.getProfilePicture()));
-
-        fileChooser = new FileChooser();
-        fileChooser.getExtensionFilters().addAll(
-                new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg")
-        );
-        fileChooser.setInitialDirectory(new File("savedProfilePictures"));
+        profileUsernameTf.setText(tempCurrentUser.getUsername());
+        profilePictureIv.setImage(new Image(tempCurrentUser.getProfilePicture()));
 
         populateTable();
 
-        followersLbl.setText(String.valueOf(currentUser.getFollowersTreeSet().size()));
-        followingLbl.setText(String.valueOf(currentUser.getFollowingTreeSet().size()));
-        blockedLbl.setText(String.valueOf(currentUser.getBlockTreeSet().size()));
-    }
-
-
-    public void editPassword() {
-        profilePasswordTf.clear();
-        profilePasswordTf.setDisable(false);
-        editPasswordBtn.setVisible(false);
-        profilePasswordConfirmBtn.setVisible(true);
-    }
-
-    public void editPhone() {
-        profilePhoneTf.clear();
-        profilePhoneTf.setDisable(false);
-        editPhoneBtn.setVisible(false);
-        profilePhoneConfirmBtn.setVisible(true);
-    }
-
-    public void editProfilePic() {
-        file = fileChooser.showOpenDialog(null);
-        if (file != null) {
-            profilePictureIv.setImage(new Image(file.toURI().toString()));
-            currentUser.setProfilePicture(file.toURI().toString());
-        }
-    }
-
-    public void profilePasswordConfirm() {
-        String password = profilePasswordTf.getText();
-        currentUser.setPassword(password);
-        profilePasswordTf.setDisable(true);
-        editPasswordBtn.setVisible(true);
-        profilePasswordConfirmBtn.setVisible(false);
-        profilePasswordTf.setText(currentUser.getPassword());
-    }
-
-    public void profilePasswordOnTyped() {
-        String password = profilePasswordTf.getText();
-
-        boolean isLengthValid = password.length() >= 8;
-        boolean hasSpecialCharacter = password.matches(".*[^a-zA-Z0-9].*");
-        boolean hasNumber = password.matches(".*[0-9].*");
-        boolean hasCapitalLetter = password.matches(".*[A-Z].*");
-
-        boolean notValid = !isLengthValid || !hasSpecialCharacter || !hasNumber || !hasCapitalLetter;
-
-        profilePasswordTf.setStyle(notValid ? "-fx-text-inner-color: red;" : "-fx-text-inner-color: green;");
-        profilePasswordConfirmBtn.setDisable(notValid);
-    }
-
-    public void profilePhoneConfirm() {
-        String phone = profilePhoneTf.getText();
-        currentUser.setPhoneNumber(phone);
-        profilePhoneTf.setDisable(true);
-        editPhoneBtn.setVisible(true);
-        profilePhoneConfirmBtn.setVisible(false);
-        profilePhoneTf.setText(currentUser.getPhoneNumber());
-    }
-
-    public void profilePhoneOnTyped() {
-        String phone = profilePhoneTf.getText();
-        boolean isLengthValid = phone.length() == 10;
-        boolean hasNumber = phone.matches("[0-9]+");
-        boolean isTaken = DataCenter.getInstance().getUserTreeSet().containsUserNumberInSet(phone);
-
-        boolean notValid = !isLengthValid || !hasNumber || isTaken;
-
-        profilePhoneTf.setStyle(notValid ? "-fx-text-inner-color: red;" : "-fx-text-inner-color: green;");
-        profilePhoneConfirmBtn.setDisable(notValid);
+        followersLbl.setText(String.valueOf(tempCurrentUser.getFollowersTreeSet().size()));
+        followingLbl.setText(String.valueOf(tempCurrentUser.getFollowingTreeSet().size()));
+        blockedLbl.setText(String.valueOf(tempCurrentUser.getBlockTreeSet().size()));
     }
 
     public void checkHistory() {
-        checkHikingHistoryLbl1.setVisible(true);
-        checkHikingHistoryLbl2.setVisible(true);
         checkImageAndCommentsBtn.setVisible(true);
-        deleteHistoryBtn.setVisible(true);
         hikingHistoryTv.setVisible(true);
         profileReviewTv.setVisible(false);
         commentPane.setVisible(false);
@@ -167,15 +85,12 @@ public class UserProfileController implements Initializable {
         allCommentsLbl.setVisible(true);
         allReviewsLbl.setVisible(true);
         showReviewContentBtn.setVisible(true);
-        checkHikingHistoryLbl1.setVisible(false);
-        checkHikingHistoryLbl2.setVisible(false);
         checkImageAndCommentsBtn.setVisible(false);
-        deleteHistoryBtn.setVisible(false);
         hikingHistoryTv.setVisible(false);
         noPicturesLbl.setVisible(false);
         hikingHistoryIv.setVisible(false);
         hikingHistoryCommentTa.setVisible(false);
-        CommentLinkedList comments = currentUser.getComments();
+        CommentLinkedList comments = tempCurrentUser.getComments();
         Node paginationOrMessage = createPagination(comments);
         commentPane.getChildren().clear();
         commentPane.getChildren().add(paginationOrMessage);
@@ -208,12 +123,6 @@ public class UserProfileController implements Initializable {
             reviewTa.setVisible(true);
             reviewTa.setText(review);
         }
-    }
-
-    public void deleteHistory() {
-        HikingHistory trail = hikingHistoryTv.getSelectionModel().getSelectedItem();
-        hikingHistory.removeHikingHistory(trail);
-        populateTable();
     }
 
     public void checkImageAndComments() {
@@ -259,33 +168,11 @@ public class UserProfileController implements Initializable {
         return pagination;
     }
 
-    public void showFollowers(ActionEvent event) throws IOException{
+    public void goBack(ActionEvent event) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/hikingtrails/project2hikingtrails/views" +
-                "/UserFollowersView.fxml"));
+                "/UserMainView.fxml"));
         Stage stage = new Stage();
-        Scene newScene = new Scene(fxmlLoader.load(), 408, 452);
-        Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        currentStage.close();
-        stage.setScene(newScene);
-        stage.show();
-    }
-
-    public void showFollowing(ActionEvent event) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/hikingtrails/project2hikingtrails/views" +
-                "/UserFollowingView.fxml"));
-        Stage stage = new Stage();
-        Scene newScene = new Scene(fxmlLoader.load(), 408, 452);
-        Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        currentStage.close();
-        stage.setScene(newScene);
-        stage.show();
-    }
-
-    public void showBlockedUsers(ActionEvent event) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/hikingtrails/project2hikingtrails/views" +
-                "/UserBlockedView.fxml"));
-        Stage stage = new Stage();
-        Scene newScene = new Scene(fxmlLoader.load(), 408, 452);
+        Scene newScene = new Scene(fxmlLoader.load(), 1220, 700);
         Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         currentStage.close();
         stage.setScene(newScene);
@@ -297,7 +184,7 @@ public class UserProfileController implements Initializable {
         reviewRatingTc.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getRating()));
         reviewDateTc.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getDate()));
         reviewTimeTc.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getTime()));
-        profileReviewTv.setItems(FXCollections.observableArrayList(currentUser.getReviews().getUserReviewsLinkedList()));
+        profileReviewTv.setItems(FXCollections.observableArrayList(tempCurrentUser.getReviews().getUserReviewsLinkedList()));
     }
 
     private void populateTable() {
@@ -312,3 +199,4 @@ public class UserProfileController implements Initializable {
         hikingHistoryTv.setItems(FXCollections.observableArrayList(hikingHistory.getHikingHistoryLinkedList()));
     }
 }
+

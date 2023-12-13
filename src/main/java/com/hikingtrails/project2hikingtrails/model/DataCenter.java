@@ -9,13 +9,14 @@ public class DataCenter implements Serializable {
     private static DataCenter instance = null;
 
     private User currentUser;
+    private User tempCurrentUser;
     private UserTreeSet userTreeSet;
-    private UserTreeMap userTreeMap;
+    //private UserTreeMap userTreeMap;
     private TrailTreeSet trailTreeSet;
 
     private DataCenter() {
         userTreeSet = new UserTreeSet();
-        userTreeMap = new UserTreeMap();
+        //userTreeMap = new UserTreeMap();
         trailTreeSet = new TrailTreeSet();
     }
 
@@ -35,6 +36,15 @@ public class DataCenter implements Serializable {
         BackUp.saveData();
     }
 
+    public User getTempCurrentUser() {
+        return tempCurrentUser;
+    }
+
+    public void setTempCurrentUser(User user) {
+        tempCurrentUser = user;
+        BackUp.saveData();
+    }
+
     public void setUserTreeSet(UserTreeSet userTreeSet) {
         this.userTreeSet = userTreeSet;
         BackUp.saveData();
@@ -44,14 +54,14 @@ public class DataCenter implements Serializable {
         return userTreeSet;
     }
 
-    public UserTreeMap getUserTreeMap() {
-        return userTreeMap;
-    }
+//    public UserTreeMap getUserTreeMap() {
+//        return userTreeMap;
+//    }
 
-    public void setUserTreeMap(UserTreeMap userTreeMap) {
-        this.userTreeMap = userTreeMap;
-        BackUp.saveData();
-    }
+//    public void setUserTreeMap(UserTreeMap userTreeMap) {
+//        this.userTreeMap = userTreeMap;
+//        BackUp.saveData();
+//    }
 
     public TrailTreeSet getTrailTreeSet() {
         return trailTreeSet;

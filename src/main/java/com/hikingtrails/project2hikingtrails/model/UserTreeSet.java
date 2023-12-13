@@ -30,6 +30,11 @@ public class UserTreeSet implements Serializable {
         return userSet.stream().anyMatch(user -> user.getPhoneNumber().equals(phoneNumber));
     }
 
+    public boolean isValidUser(String username, String password) {
+        return userSet.contains(new User(username, "")) &&
+                userSet.ceiling(new User(username, "")).getPassword().equals(password);
+    }
+
     public User getUser(String username) {
         return userSet.ceiling(new User(username, ""));
     }

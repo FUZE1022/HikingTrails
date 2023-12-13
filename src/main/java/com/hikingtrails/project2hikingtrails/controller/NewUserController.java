@@ -34,7 +34,7 @@ public class NewUserController implements Initializable {
     private FileChooser fileChooser;
     private File file;
     private UserTreeSet userTreeSet = DataCenter.getInstance().getUserTreeSet();
-    private UserTreeMap userTreeMap = DataCenter.getInstance().getUserTreeMap();
+    //private UserTreeMap userTreeMap = DataCenter.getInstance().getUserTreeMap();
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         fileChooser = new FileChooser();
@@ -67,8 +67,8 @@ public class NewUserController implements Initializable {
                 if (buttonType == yesButton) {
                     userTreeSet.addUserToSet(new User(usernameTf.getText(), passwordTf.getText(),
                             phoneNumTf.getText(), file.toURI().toString()));
-                    userTreeMap.addUser(new User(usernameTf.getText(), passwordTf.getText(), phoneNumTf.getText(),
-                            file.toURI().toString()));
+                    //userTreeMap.addUser(new User(usernameTf.getText(), passwordTf.getText(), phoneNumTf.getText(),
+                            //file.toURI().toString()));
                     Alert successAlert = new Alert(Alert.AlertType.INFORMATION);
                     successAlert.setTitle("Success");
                     successAlert.setHeaderText(null);

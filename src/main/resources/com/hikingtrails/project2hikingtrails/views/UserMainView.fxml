@@ -56,13 +56,14 @@
                   <Image url="@../images/m2i8G6H7d3d3H7K9.png" />
                </image>
             </ImageView>
+            <Label layoutX="853.0" layoutY="10.0" prefHeight="39.0" prefWidth="261.0" text="Can unblock users by searching aswell" textFill="WHITE" wrapText="true" />
          </children>
       </Pane>
       <VBox layoutY="158.0" prefHeight="195.0" prefWidth="176.0" style="-fx-background-color: white;" AnchorPane.bottomAnchor="347.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="1004.0" AnchorPane.topAnchor="158.0">
          <children>
-            <Button fx:id="homeBtn" mnemonicParsing="false" onAction="#homeOnAction" prefHeight="48.0" prefWidth="170.0" style="-fx-background-color: #fff;" styleClass="button" text="Home">
+            <Button fx:id="profileBtn" mnemonicParsing="false" onAction="#profileOnAction" prefHeight="48.0" prefWidth="176.0" style="-fx-background-color: fff;" text="Profile">
                <graphic>
-                  <FontIcon iconLiteral="fas-home" />
+                  <FontIcon iconLiteral="far-user" />
                </graphic></Button>
             <Button fx:id="trailsBtn" mnemonicParsing="false" onAction="#trailsOnAction" prefHeight="48.0" prefWidth="171.0" style="-fx-background-color: fff;" text="Trails">
                <graphic>
@@ -73,17 +74,13 @@
                   <FontIcon iconLiteral="fas-hiking" />
                </graphic>
             </Button>
-            <Button fx:id="profileBtn" mnemonicParsing="false" onAction="#profileOnAction" prefHeight="48.0" prefWidth="176.0" style="-fx-background-color: fff;" text="Profile">
-               <graphic>
-                  <FontIcon iconLiteral="far-user" />
-               </graphic></Button>
             <Button fx:id="adminBtn" mnemonicParsing="false" prefHeight="48.0" prefWidth="176.0" style="-fx-background-color: fff;" text="Admin" visible="false">
                <graphic>
                   <FontIcon iconLiteral="far-clipboard" />
                </graphic></Button>
          </children>
       </VBox>
-      <Button fx:id="backBtn" layoutY="634.0" mnemonicParsing="false" onAction="#goBack" prefHeight="65.0" prefWidth="176.0" style="-fx-background-color: fff;" text="Logout" AnchorPane.bottomAnchor="1.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="1004.0" AnchorPane.topAnchor="634.0">
+      <Button fx:id="backBtn" layoutY="642.0" mnemonicParsing="false" onAction="#goBack" prefHeight="57.0" prefWidth="170.0" style="-fx-background-color: fff;" text="Logout" AnchorPane.bottomAnchor="1.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="1050.0" AnchorPane.topAnchor="642.0">
          <graphic>
             <FontIcon iconLiteral="far-arrow-alt-circle-left" />
          </graphic></Button>

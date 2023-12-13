@@ -23,13 +23,13 @@ public class MainController {
     @FXML
     private Hyperlink newUserHl;
     private UserTreeSet userTreeSet = DataCenter.getInstance().getUserTreeSet();
-    private UserTreeMap userTreeMap = DataCenter.getInstance().getUserTreeMap();
+    //private UserTreeMap userTreeMap = DataCenter.getInstance().getUserTreeMap();
     public void login(ActionEvent event) throws IOException {
 //        if(username.getText().equalsIgnoreCase("Admin") && passwordPf.getText().equals("SCCC")) {
 //            System.out.println("Admin login");
 //            //TODO: Admin login
 //        }
-        if(userTreeMap.isValidUser(username.getText().trim(), passwordPf.getText())) {
+        if(userTreeSet.isValidUser(username.getText().trim(), passwordPf.getText())) {
             DataCenter.getInstance().setCurrentUser(userTreeSet.getUser(username.getText().trim()));
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/hikingtrails/project2hikingtrails/views" +
                     "/UserMainView.fxml"));

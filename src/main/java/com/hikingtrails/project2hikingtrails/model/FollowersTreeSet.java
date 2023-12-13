@@ -1,40 +1,40 @@
 package com.hikingtrails.project2hikingtrails.model;
 
+import com.hikingtrails.project2hikingtrails.util.BackUp;
+
 import java.io.Serializable;
 import java.util.TreeSet;
 
 public class FollowersTreeSet implements Serializable {
-    private TreeSet<User> followers;
+    private TreeSet<String> followers;
 
     public FollowersTreeSet() {
         this.followers = new TreeSet<>();
     }
 
-    public void addFollower(User user) {
+    public void addFollower(String user) {
         followers.add(user);
+        BackUp.saveData();
     }
 
-    public void removeFollower(User user) {
+    public void removeFollower(String user) {
         followers.remove(user);
+        BackUp.saveData();
     }
 
-    public boolean containsFollower(User user) {
+    public boolean containsFollower(String user) {
         return followers.contains(user);
     }
 
-    public User getFollower(User user) {
+    public String getFollower(String user) {
         return followers.ceiling(user);
     }
 
-    public TreeSet<User> getFollowers() {
+    public TreeSet<String> getFollowersTree() {
         return followers;
     }
 
     public int size() {
         return followers.size();
-    }
-
-    public boolean isEmpty() {
-        return followers.isEmpty();
     }
 }

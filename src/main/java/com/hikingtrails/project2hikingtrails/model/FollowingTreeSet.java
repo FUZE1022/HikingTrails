@@ -6,39 +6,35 @@ import java.io.Serializable;
 import java.util.TreeSet;
 
 public class FollowingTreeSet implements Serializable {
-    private TreeSet<User> following;
+    private TreeSet<String> following;
 
     public FollowingTreeSet() {
         this.following = new TreeSet<>();
     }
 
-    public void addFollowing(User user) {
+    public void addFollowing(String user) {
         following.add(user);
         BackUp.saveData();
     }
 
-    public void removeFollowing(User user) {
+    public void removeFollowing(String user) {
         following.remove(user);
         BackUp.saveData();
     }
 
-    public boolean containsFollowing(User user) {
+    public boolean containsFollowing(String user) {
         return following.contains(user);
     }
 
-    public User getFollowing(User user) {
+    public String getFollowingUser(String user) {
         return following.ceiling(user);
     }
 
-    public TreeSet<User> getFollowing() {
+    public TreeSet<String> getFollowing() {
         return following;
     }
 
     public int size() {
         return following.size();
-    }
-
-    public boolean isEmpty() {
-        return following.isEmpty();
     }
 }

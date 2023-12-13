@@ -24,23 +24,29 @@ public class Main extends Application {
 
     public static void main(String[] args) throws Exception {
         BackUp.loadData();
-        TrailTreeSet trailHashMap = DataCenter.getInstance().getTrailTreeSet();
-        trailHashMap.addTrail(new Trail("Avalon/East Farm Preserve", "Avalon Preserve", "3.5", "269", "Easy",
-                "Loop"));
-        trailHashMap.addTrail(new Trail("Connetquot River State Park Preserve", "Bohemia County Park", "3.0",
-                "269", "Easy", "Loop"));
-        trailHashMap.addTrail(new Trail("Wertheim Wildlife Trail", "Wertheim National Wildlife Refuge", "3.2",
-                "49", "Easy", "Loop"));
-        trailHashMap.addTrail(new Trail("Terrel River Trail", "Terrel River County Park", "2.7", "36", "Easy",
-                "Loop"));
-        trailHashMap.addTrail(new Trail("Glacier Ridge Preserve Trail", "Bald Hill Cultural Park", "11.2", "816",
-                "Hard", "Loop"));
-        trailHashMap.addTrail(new Trail("Rocky Point Trail", "Rocky Point State Pine Barrens Preserve", "10.4",
-                "236", "Moderate", "Loop"));
-        trailHashMap.addTrail(new Trail("Pine Trail Nature Preserve", "Ridge, New York", "4.5", "82", "Eays", "Out &" +
-                " Back"));
-        trailHashMap.addTrail(new Trail("North Shore Rail Trail", "Port Jefferson Station, New York", "10.5", "209",
-                "Moderate", "Point to Point"));
+//        TrailTreeSet trailHashMap = DataCenter.getInstance().getTrailTreeSet();
+//        trailHashMap.addTrail(new Trail("Avalon/East Farm Preserve", "Avalon Preserve", "3.5", "269", "Easy",
+//                "Loop"));
+//        trailHashMap.addTrail(new Trail("Connetquot River State Park Preserve", "Bohemia County Park", "3.0",
+//                "269", "Easy", "Loop"));
+//        trailHashMap.addTrail(new Trail("Wertheim Wildlife Trail", "Wertheim National Wildlife Refuge", "3.2",
+//                "49", "Easy", "Loop"));
+//        trailHashMap.addTrail(new Trail("Terrel River Trail", "Terrel River County Park", "2.7", "36", "Easy",
+//                "Loop"));
+//        trailHashMap.addTrail(new Trail("Glacier Ridge Preserve Trail", "Bald Hill Cultural Park", "11.2", "816",
+//                "Hard", "Loop"));
+//        trailHashMap.addTrail(new Trail("Rocky Point Trail", "Rocky Point State Pine Barrens Preserve", "10.4",
+//                "236", "Moderate", "Loop"));
+//        trailHashMap.addTrail(new Trail("Pine Trail Nature Preserve", "Ridge, New York", "4.5", "82", "Easy", "Out &" +
+//                " Back"));
+//        trailHashMap.addTrail(new Trail("North Shore Rail Trail", "Port Jefferson Station, New York", "10.5", "209",
+//                "Moderate", "Point to Point"));
+//        UserTreeSet userTreeSet = DataCenter.getInstance().getUserTreeSet();
+//        userTreeSet.addUserToSet(new User("Username1", "Password1!", "1234567890", "E:\\IntelliJProjects\\CSE218\\Projects\\Project2HikingTrails\\savedProfilePictures\\thispersondoesnotexist.jpg"));
+//        userTreeSet.addUserToSet(new User("Username2", "Password2!", "1234567891", "E:\\IntelliJProjects\\CSE218\\Projects\\Project2HikingTrails\\savedProfilePictures\\thispersondoesnotexist1.jpg"));
+//        UserTreeMap userTreeMap = DataCenter.getInstance().getUserTreeMap();
+//        userTreeMap.addUser(new User("Username1", "Password1!"));
+//        userTreeMap.addUser(new User("Username2", "Password2!"));
         launch();
     }
 }
