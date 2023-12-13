@@ -32,7 +32,7 @@
       <Button fx:id="editPasswordBtn" layoutX="315.0" layoutY="104.0" mnemonicParsing="false" onAction="#editPassword" text="Edit" />
       <Button fx:id="editPhoneBtn" layoutX="315.0" layoutY="149.0" mnemonicParsing="false" onAction="#editPhone" text="Edit" />
       <Button fx:id="editProfilePicBtn" layoutX="464.0" layoutY="184.0" mnemonicParsing="false" onAction="#editProfilePic" prefHeight="25.0" prefWidth="62.0" text="Edit" />
-      <TableView fx:id="hikingHistoryTv" layoutX="146.0" layoutY="218.0" prefHeight="200.0" prefWidth="697.0">
+      <TableView fx:id="hikingHistoryTv" layoutX="145.0" layoutY="217.0" prefHeight="200.0" prefWidth="697.0">
         <columns>
           <TableColumn fx:id="hikingHistoryTrailNameTc" prefWidth="172.0" text="Trail Name" />
           <TableColumn fx:id="hikingHistoryStartTimeTc" prefWidth="76.0" text="Start Time" />
@@ -50,12 +50,12 @@
       <Label fx:id="followingLbl" layoutX="709.0" layoutY="89.0" prefHeight="17.0" prefWidth="37.0" text="0" />
       <Button fx:id="checkHistoryBtn" layoutX="619.0" layoutY="137.0" mnemonicParsing="false" onAction="#checkHistory" text="Check Hiking History" />
       <Button fx:id="checkReviewAndCommentsBtn" layoutX="585.0" layoutY="184.0" mnemonicParsing="false" onAction="#checkReviewAndComments" text="Check All Reviews And Comments" />
-      <ImageView fx:id="hikingHistoryIv" fitHeight="150.0" fitWidth="200.0" layoutX="215.0" layoutY="428.0" pickOnBounds="true" />
+      <ImageView fx:id="hikingHistoryIv" fitHeight="150.0" fitWidth="200.0" layoutX="215.0" layoutY="428.0" pickOnBounds="true" visible="false" />
       <TextArea fx:id="hikingHistoryCommentTa" editable="false" layoutX="530.0" layoutY="428.0" prefHeight="150.0" prefWidth="268.0" visible="false" />
       <Button fx:id="deleteHistoryBtn" layoutX="25.0" layoutY="271.0" mnemonicParsing="false" onAction="#deleteHistory" prefHeight="25.0" prefWidth="101.0" text="Delete History" />
       <Button fx:id="checkImageAndCommentsBtn" layoutX="22.0" layoutY="333.0" mnemonicParsing="false" onAction="#checkImageAndComments" prefHeight="44.0" prefWidth="107.0" text="Check Image and Comments" wrapText="true" />
-      <Label layoutX="25.0" layoutY="197.0" prefHeight="69.0" prefWidth="107.0" text="Click the specific Row you would like to delete" wrapText="true" />
-      <Label layoutX="62.0" layoutY="308.0" text="Or" />
+      <Label fx:id="checkHikingHistoryLbl1" layoutX="25.0" layoutY="197.0" prefHeight="69.0" prefWidth="107.0" text="Click the specific Row you would like to delete" wrapText="true" />
+      <Label fx:id="checkHikingHistoryLbl2" layoutX="62.0" layoutY="308.0" text="Or" />
       <Button fx:id="profilePasswordConfirmBtn" layoutX="315.0" layoutY="103.0" mnemonicParsing="false" onAction="#profilePasswordConfirm" prefHeight="26.0" prefWidth="62.0" text="Confirm" visible="false" />
       <Button fx:id="profilePhoneConfirmBtn" layoutX="315.0" layoutY="148.0" mnemonicParsing="false" onAction="#profilePhoneConfirm" prefHeight="26.0" prefWidth="62.0" text="Confirm" visible="false" />
       <Label fx:id="noPicturesLbl" layoutX="206.0" layoutY="476.0" prefHeight="17.0" prefWidth="101.0" text="No Pictures" visible="false">
@@ -63,5 +63,32 @@
             <Font size="18.0" />
          </font>
       </Label>
+      <TableView fx:id="profileReviewTv" layoutX="101.0" layoutY="233.0" prefHeight="200.0" prefWidth="448.0" visible="false">
+        <columns>
+          <TableColumn fx:id="reviewTrailNameTc" prefWidth="228.80003356933594" text="Trial Name" />
+          <TableColumn fx:id="reviewTimeTc" minWidth="4.800048828125" prefWidth="69.5999755859375" text="Time" />
+            <TableColumn fx:id="reviewDateTc" prefWidth="89.5999755859375" text="Date" />
+            <TableColumn fx:id="reviewRatingTc" minWidth="0.0" prefWidth="61.5999755859375" text="Rating" />
+        </columns>
+      </TableView>
+      <Pane fx:id="commentPane" layoutX="558.0" layoutY="277.0" prefHeight="200.0" prefWidth="268.0" visible="false" />
+      <ImageView fx:id="reviewIv" fitHeight="144.0" fitWidth="200.0" layoutX="113.0" layoutY="436.0" pickOnBounds="true" preserveRatio="true" />
+      <TextArea fx:id="reviewTa" editable="false" layoutX="333.0" layoutY="437.0" prefHeight="138.0" prefWidth="218.0" visible="false" />
+      <Label fx:id="noPictureLbl" layoutX="168.0" layoutY="488.0" text="No Pictures" visible="false">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Label fx:id="allCommentsLbl" layoutX="734.0" layoutY="233.0" text="All comments" visible="false">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Label fx:id="allReviewsLbl" layoutX="276.0" layoutY="203.0" text="All Reviews" visible="false">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Button fx:id="showReviewContentBtn" layoutX="7.0" layoutY="295.0" mnemonicParsing="false" onAction="#showReviewContent" prefHeight="58.0" prefWidth="86.0" text="Show Review Content" visible="false" wrapText="true" />
    </children>
 </AnchorPane>

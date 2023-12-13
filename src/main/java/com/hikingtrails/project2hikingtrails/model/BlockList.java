@@ -1,4 +1,6 @@
 package com.hikingtrails.project2hikingtrails.model;
 
-public class BlockList {
+import java.io.Serializable;
+
+public class BlockList implements Serializable {
 }

@@ -220,6 +220,7 @@ public class UserTrailController implements Initializable {
         } else {
             Review review = reviewsTv.getSelectionModel().getSelectedItem();
             review.getComments().addComment(new Comment(currentUser.getUsername(), writeCommentTa.getText()));
+            currentUser.getComments().addComment(new Comment(currentUser.getUsername(), writeCommentTa.getText()));
             writeCommentTa.setText(null);
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Success");
@@ -288,7 +289,41 @@ public class UserTrailController implements Initializable {
     }
 
     public void followAuthor() {
-
+        if(reviewsTv.getSelectionModel().getSelectedItem() == null) {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Error");
+            alert.setHeaderText(null);
+            alert.setContentText("Please select a review to follow user.");
+            alert.showAndWait();
+            return;
+        } else {
+            Review review = reviewsTv.getSelectionModel().getSelectedItem();
+            User user = DataCenter.getInstance().getUserTreeSet().getUser(review.getUsername());
+            if(currentUser.getFollowingTreeSet().containsFollowing(user)) {
+                Alert alert = new Alert(Alert.AlertType.WARNING);
+                alert.setTitle("Error");
+                alert.setHeaderText(null);
+                alert.setContentText("You are already following this user.");
+                alert.showAndWait();
+                return;
+            } else if (currentUser.getUsername().equals(user.getUsername())) {
+                Alert alert = new Alert(Alert.AlertType.WARNING);
+                alert.setTitle("Error");
+                alert.setHeaderText(null);
+                alert.setContentText("You cannot follow yourself.");
+                alert.showAndWait();
+                return;
+            }
+            else {
+                currentUser.getFollowingTreeSet().addFollowing(user);
+                user.getFollowersTreeSet().addFollower(currentUser);
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Success");
+                alert.setHeaderText(null);
+                alert.setContentText("You are now following this user.");
+                alert.showAndWait();
+            }
+        }
     }
 
     public void uploadPicture() {

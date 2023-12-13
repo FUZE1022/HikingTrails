@@ -6,35 +6,33 @@ import java.io.Serializable;
 import java.util.Objects;
 
 public class User implements Serializable, Comparable<User> {
-    private String username, password, phoneNumber, profilePicture, followers, following;
+    private String username, password, phoneNumber, profilePicture;
     private HikingHistoryLinkedList hikingHistory;
     private UserReviewsLinkedList reviews;
+    private CommentLinkedList comments;
+    private FollowersTreeSet followersTreeSet;
+    private FollowingTreeSet followingTreeSet;
     private boolean isAdmin = false;
 
 
     public User(String username, String password) {
-        this(username, password, "", "",  "", "");
-    }
-
-    public User(String username, String password, String phoneNumber, String profilePicture) {
-        this(username, password, phoneNumber, profilePicture, "", "");
+        this(username, password, "", "");
     }
 
     public User(Admin admin) {
-        this(admin.getUsername(), admin.getPassword(), admin.getPhoneNumber(), admin.getProfilePicture(),
-                admin.getFollowers(), admin.getFollowing());
+        this(admin.getUsername(), admin.getPassword(), admin.getPhoneNumber(), admin.getProfilePicture());
     }
 
-    public User(String username, String password, String phoneNumber, String profilePicture,
-                String followers, String following) {
+    public User(String username, String password, String phoneNumber, String profilePicture) {
         this.username = username;
         this.password = password;
         this.phoneNumber = phoneNumber;
         this.profilePicture = profilePicture;
         this.hikingHistory = new HikingHistoryLinkedList();
-        this.followers = followers;
-        this.following = following;
         this.reviews = new UserReviewsLinkedList();
+        this.comments = new CommentLinkedList();
+        this.followersTreeSet = new FollowersTreeSet();
+        this.followingTreeSet = new FollowingTreeSet();
     }
 
     public String getUsername() {
@@ -72,16 +70,20 @@ public class User implements Serializable, Comparable<User> {
         return hikingHistory;
     }
 
-    public String getFollowers() {
-        return followers;
-    }
-
-    public String getFollowing() {
-        return following;
-    }
-
     public UserReviewsLinkedList getReviews() {
         return reviews;
+    }
+
+    public CommentLinkedList getComments() {
+        return comments;
+    }
+
+    public FollowersTreeSet getFollowersTreeSet() {
+        return followersTreeSet;
+    }
+
+    public FollowingTreeSet getFollowingTreeSet() {
+        return followingTreeSet;
     }
 
     public boolean getIsAdmin() {
@@ -97,8 +99,6 @@ public class User implements Serializable, Comparable<User> {
                 ", phoneNumber='" + phoneNumber + '\'' +
                 ", profilePicture='" + profilePicture + '\'' +
                 ", hikingHistory='" + hikingHistory + '\'' +
-                ", followers='" + followers + '\'' +
-                ", following='" + following + '\'' +
                 ", reviews='" + reviews + '\'' +
                 '}';
     }
@@ -110,14 +110,12 @@ public class User implements Serializable, Comparable<User> {
         User user = (User) o;
         return Objects.equals(username, user.username) && Objects.equals(password, user.password) &&
                 Objects.equals(phoneNumber, user.phoneNumber) && Objects.equals(profilePicture, user.profilePicture) &&
-                Objects.equals(hikingHistory, user.hikingHistory) && Objects.equals(followers, user.followers) &&
-                Objects.equals(following, user.following) && Objects.equals(reviews, user.reviews);
+                Objects.equals(hikingHistory, user.hikingHistory) && Objects.equals(reviews, user.reviews);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(username, password, phoneNumber, profilePicture, hikingHistory, followers, following,
-                reviews);
+        return Objects.hash(username, password, phoneNumber, profilePicture, hikingHistory, reviews);
     }
 
 

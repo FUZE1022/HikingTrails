@@ -15,7 +15,7 @@
 <?import javafx.scene.text.Font?>
 <?import org.kordamp.ikonli.javafx.FontIcon?>
 
-<AnchorPane prefHeight="700.0" prefWidth="1180.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.hikingtrails.project2hikingtrails.controller.UserMainController">
+<AnchorPane prefHeight="700.0" prefWidth="1220.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.hikingtrails.project2hikingtrails.controller.UserMainController">
    <children>
       <Pane layoutY="-5.0" prefHeight="158.0" prefWidth="1180.0" style="-fx-background-color: #39A67F;" AnchorPane.bottomAnchor="548.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="-6.0">
          <children>
@@ -30,7 +30,7 @@
                </font>
             </TextField>
             <Line endX="100.0" layoutX="954.0" layoutY="71.0" startX="-100.0" stroke="WHITE" strokeWidth="2.0" />
-            <Button fx:id="exitBtn" layoutX="1117.0" layoutY="6.0" mnemonicParsing="false" onAction="#exit" style="-fx-background-color: #39A67F;" text="X" textFill="WHITE">
+            <Button fx:id="exitBtn" layoutX="1151.0" layoutY="3.0" mnemonicParsing="false" onAction="#exit" style="-fx-background-color: #39A67F;" text="X" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="32.0" />
                </font>

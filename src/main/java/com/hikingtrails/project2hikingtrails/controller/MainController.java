@@ -34,7 +34,7 @@ public class MainController {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/hikingtrails/project2hikingtrails/views" +
                     "/UserMainView.fxml"));
             Stage stage = new Stage();
-            Scene newScene = new Scene(fxmlLoader.load(), 1180, 700);
+            Scene newScene = new Scene(fxmlLoader.load(), 1220, 700);
             Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             currentStage.close();
             stage.setScene(newScene);
