@@ -12,6 +12,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.stage.Stage;
@@ -48,6 +49,12 @@ public class UserBlockedController implements Initializable {
                 currentUser.getFollowingTreeSet().addFollowing(userToUnblock);
             }
             populateBlockedListView();
+        } else {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("No User Selected");
+            alert.setContentText("Please select a user to unblock.");
+            alert.showAndWait();
         }
     }
 

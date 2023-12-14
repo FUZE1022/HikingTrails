@@ -7,13 +7,13 @@ import java.util.*;
 
 public class TrailTreeSet implements Serializable {
     private TreeSet<Trail> trailSet;
-    private final int MAX_SIZE = 50000;
 
     public TrailTreeSet() {
         this.trailSet = new TreeSet<>();
     }
 
     public void addTrail(Trail trail) throws Exception {
+        int MAX_SIZE = 50000;
         if(trailSet.size() == MAX_SIZE) {
             throw new Exception("Can not go over 50,000 Trails");
         }

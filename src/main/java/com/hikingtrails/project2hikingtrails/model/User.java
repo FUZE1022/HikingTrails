@@ -13,7 +13,6 @@ public class User implements Serializable, Comparable<User> {
     private FollowersTreeSet followersTreeSet;
     private FollowingTreeSet followingTreeSet;
     private BlockTreeSet blockTreeSet;
-    private boolean isAdmin = false;
 
 
     public User(String username, String password) {
@@ -91,11 +90,6 @@ public class User implements Serializable, Comparable<User> {
         return blockTreeSet;
     }
 
-    public boolean getIsAdmin() {
-        return isAdmin;
-    }
-
-
     @Override
     public String toString() {
         return "User{" +
@@ -111,7 +105,7 @@ public class User implements Serializable, Comparable<User> {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         User user = (User) o;
-        return isAdmin == user.isAdmin && Objects.equals(username, user.username) &&
+        return Objects.equals(username, user.username) &&
                 Objects.equals(password, user.password) && Objects.equals(phoneNumber, user.phoneNumber) &&
                 Objects.equals(profilePicture, user.profilePicture) && Objects.equals(hikingHistory, user.hikingHistory)
                 && Objects.equals(reviews, user.reviews) && Objects.equals(comments, user.comments) &&

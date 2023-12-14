@@ -60,14 +60,20 @@ public class UsersFollowingController implements Initializable {
             }
             BackUp.saveData();
             populateFollowingListView();
+        } else {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("No user selected");
+            alert.setContentText("Please select a user to block");
+            alert.showAndWait();
         }
     }
 
     public void unfollow() {
         String userToUnfollow = followingListView.getSelectionModel().getSelectedItem();
-        followingListView.getSelectionModel().clearSelection();
-        currentUser.getFollowingTreeSet().removeFollowing(userToUnfollow);
         if (userToUnfollow != null) {
+            followingListView.getSelectionModel().clearSelection();
+            currentUser.getFollowingTreeSet().removeFollowing(userToUnfollow);
             User unfollowedUser = DataCenter.getInstance().getUserTreeSet().getUser(userToUnfollow);
             if (unfollowedUser != null) {
                 unfollowedUser.getFollowersTreeSet().removeFollower(currentUser.getUsername());

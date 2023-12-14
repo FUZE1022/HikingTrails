@@ -61,9 +61,24 @@ public class UserFollowersController implements Initializable{
             BackUp.saveData();
             populateFollowerListView();
         }
+        else {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("No user selected");
+            alert.setContentText("Please select a user to block");
+            alert.showAndWait();
+        }
     }
 
     public void profile(ActionEvent event) throws IOException {
+        if(followersListView.getSelectionModel().getSelectedItem() == null) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("No user selected");
+            alert.setContentText("Please select a user to view");
+            alert.showAndWait();
+            return;
+        }
         User tempUser = DataCenter.getInstance().getUserTreeSet().getUser(followersListView.getSelectionModel().getSelectedItem());
         DataCenter.getInstance().setTempCurrentUser(tempUser);
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/hikingtrails/project2hikingtrails/views" +
