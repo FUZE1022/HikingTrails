@@ -1,6 +1,7 @@
 package com.hikingtrails.project2hikingtrails.model;
 
 import com.hikingtrails.project2hikingtrails.util.BackUp;
+import javafx.collections.ObservableList;
 
 import java.io.Serializable;
 import java.util.TreeSet;
@@ -44,12 +45,6 @@ public class UserTreeSet implements Serializable {
 
     public void setUserSet(TreeSet<User> userSet) {
         this.userSet = userSet;
-    }
-
-    public void displayUserSet() {
-        for (User user : userSet) {
-            System.out.println(user);
-        }
     }
 
     @Override

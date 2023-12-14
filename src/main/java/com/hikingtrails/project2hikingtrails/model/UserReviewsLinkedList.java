@@ -39,10 +39,4 @@ public class UserReviewsLinkedList implements Serializable {
         this.userReviewsLinkedList = userReviewsLinkedList;
         BackUp.saveData();
     }
-
-    public void displayReviews() {
-        for (Review review : userReviewsLinkedList) {
-            System.out.println(review);
-        }
-    }
 }

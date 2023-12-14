@@ -13,7 +13,7 @@ public class User implements Serializable, Comparable<User> {
     private FollowersTreeSet followersTreeSet;
     private FollowingTreeSet followingTreeSet;
     private BlockTreeSet blockTreeSet;
-
+    private boolean isAdmin = false;
 
     public User(String username, String password) {
         this(username, password, "", "");
@@ -89,7 +89,9 @@ public class User implements Serializable, Comparable<User> {
     public BlockTreeSet getBlockTreeSet() {
         return blockTreeSet;
     }
-
+    public boolean getIsAdmin() {
+        return isAdmin;
+    }
     @Override
     public String toString() {
         return "User{" +
@@ -123,4 +125,6 @@ public class User implements Serializable, Comparable<User> {
     public int compareTo(User o) {
         return this.username.compareTo(o.username);
     }
+
+
 }

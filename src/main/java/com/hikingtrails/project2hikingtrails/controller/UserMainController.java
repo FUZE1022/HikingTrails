@@ -44,11 +44,8 @@ public class UserMainController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         userLbl.setText(currentUser.getUsername());
-//        if(currentUser.getIsAdmin())
-////            adminBtn.setVisible(true);
-//        RootAdmin rootAdmin = new RootAdmin();
-//        rootAdmin.promoteToAdmin(currentUser);
-//        System.out.println(currentUser.getIsAdmin());
+        if(currentUser.getIsAdmin())
+            adminBtn.setVisible(true);
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/hikingtrails/project2hikingtrails/views" +
                 "/UserProfileView.fxml"));
@@ -113,6 +110,20 @@ public class UserMainController implements Initializable {
     public void hikingOnAction(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/hikingtrails/project2hikingtrails/views/" +
                 "UserHikingView.fxml"));
+        Parent newSceneRoot = loader.load();
+        stackPane.getChildren().add(newSceneRoot);
+        newSceneRoot.toFront();
+        for (Node node : stackPane.getChildren()) {
+            if (node != newSceneRoot) {
+                node.setVisible(false);
+                node.setManaged(false);
+            }
+        }
+    }
+
+    public void adminOnAction(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/hikingtrails/project2hikingtrails/views/" +
+                "AdminView.fxml"));
         Parent newSceneRoot = loader.load();
         stackPane.getChildren().add(newSceneRoot);
         newSceneRoot.toFront();

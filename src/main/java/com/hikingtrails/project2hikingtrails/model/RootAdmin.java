@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 public class RootAdmin implements Serializable {
     private String username, password;
+    private UserTreeSet userTreeSet = DataCenter.getInstance().getUserTreeSet();
 
     public RootAdmin() {
         this("Admin", "SCCC");
@@ -13,11 +14,17 @@ public class RootAdmin implements Serializable {
         this.password = password;
     }
 
-    public void promoteToAdmin(User user) {
-        new Admin(user);
+    public Admin promoteUserToAdmin(User user) {
+        Admin admin = new Admin(user);
+        userTreeSet.removeUserFromSet(user);
+        userTreeSet.addUserToSet(admin);
+        return admin;
     }
 
-    public void demoteToUser(Admin admin) {
-        new User(admin);
+    public User demoteAdminToUser(Admin admin) {
+        User user = new User(admin.getUsername(), admin.getPassword(), admin.getPhoneNumber(), admin.getProfilePicture());
+        userTreeSet.removeUserFromSet(admin);
+        userTreeSet.addUserToSet(user);
+        return user;
     }
 }

@@ -14,7 +14,10 @@ import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;
 
 import java.io.File;
+import java.io.IOException;
 import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.StandardCopyOption;
 import java.util.ResourceBundle;
 
 public class UserHikingController implements Initializable {
@@ -86,9 +89,20 @@ public class UserHikingController implements Initializable {
     }
 
     public void uploadFile() {
-        file = fileChooser.showOpenDialog(null);
-        if (file != null) {
-            picIv.setImage(new Image(file.toURI().toString()));
+        File selectedFile = fileChooser.showOpenDialog(null);
+        if (selectedFile != null) {
+            try {
+                String directoryPath = "savedPictures";
+                File directory = new File(directoryPath);
+                String uniqueFileName = "profile_" + System.currentTimeMillis() + ".png";
+                File destinationFile = new File(directory, uniqueFileName);
+                Files.copy(selectedFile.toPath(), destinationFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
+                picIv.setImage(new Image(destinationFile.toURI().toString()));
+                file = destinationFile;
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
 }

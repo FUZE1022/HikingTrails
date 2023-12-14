@@ -45,6 +45,29 @@ public class Trail implements Serializable, Comparable<Trail> {
         return reviews;
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setHeadAddress(String headAddress) {
+        this.headAddress = headAddress;
+    }
+
+    public void setElevationGain(String elevationGain) {
+        this.elevationGain = elevationGain;
+    }
+
+    public void setLength(String length) {
+        this.length = length;
+    }
+
+    public void setDifficulty(String difficulty) {
+        this.difficulty = difficulty;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
 
     @Override
     public String toString() {

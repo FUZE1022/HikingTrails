@@ -15,7 +15,6 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
-import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 import java.io.File;
@@ -51,8 +50,6 @@ public class UserFollowingProfileController implements Initializable {
 
     private User tempCurrentUser = DataCenter.getInstance().getTempCurrentUser();
     private HikingHistoryLinkedList hikingHistory = tempCurrentUser.getHikingHistory();
-    private FileChooser fileChooser;
-    private File file;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -192,7 +189,7 @@ public class UserFollowingProfileController implements Initializable {
         hikingHistoryStartTimeTc.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getStartTime()));
         hikingHistoryEndTimeTc.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getEndTime()));
         hikingHistoryStartDateTc.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getStartDate()));
-        hikingHistoryEndDateTc.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getEndTime()));
+        hikingHistoryEndDateTc.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getEndDate()));
         hikingHistoryDistanceTc.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getDistance()));
         hikingHistoryDurationTc.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getDuration()));
         hikingHistoryPaceTc.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getAvgPace()));

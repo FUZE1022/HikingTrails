@@ -21,6 +21,8 @@ import javafx.stage.Stage;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.StandardCopyOption;
 import java.util.ResourceBundle;
 
 public class UserProfileController implements Initializable {
@@ -94,10 +96,20 @@ public class UserProfileController implements Initializable {
     }
 
     public void editProfilePic() {
-        file = fileChooser.showOpenDialog(null);
-        if (file != null) {
-            profilePictureIv.setImage(new Image(file.toURI().toString()));
-            currentUser.setProfilePicture(file.toURI().toString());
+        File selectedFile = fileChooser.showOpenDialog(null);
+        if (selectedFile != null) {
+            try {
+                String directoryPath = "savedPictures";
+                File directory = new File(directoryPath);
+                String uniqueFileName = "profile_" + System.currentTimeMillis() + ".png";
+                File destinationFile = new File(directory, uniqueFileName);
+                Files.copy(selectedFile.toPath(), destinationFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
+                profilePictureIv.setImage(new Image(destinationFile.toURI().toString()));
+                currentUser.setProfilePicture(destinationFile.toURI().toString());
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
 
@@ -305,7 +317,7 @@ public class UserProfileController implements Initializable {
         hikingHistoryStartTimeTc.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getStartTime()));
         hikingHistoryEndTimeTc.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getEndTime()));
         hikingHistoryStartDateTc.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getStartDate()));
-        hikingHistoryEndDateTc.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getEndTime()));
+        hikingHistoryEndDateTc.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getEndDate()));
         hikingHistoryDistanceTc.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getDistance()));
         hikingHistoryDurationTc.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getDuration()));
         hikingHistoryPaceTc.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getAvgPace()));

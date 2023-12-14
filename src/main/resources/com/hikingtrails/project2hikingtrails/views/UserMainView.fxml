@@ -74,7 +74,7 @@
                   <FontIcon iconLiteral="fas-hiking" />
                </graphic>
             </Button>
-            <Button fx:id="adminBtn" mnemonicParsing="false" prefHeight="48.0" prefWidth="176.0" style="-fx-background-color: fff;" text="Admin" visible="false">
+            <Button fx:id="adminBtn" mnemonicParsing="false" onAction="#adminOnAction" prefHeight="48.0" prefWidth="176.0" style="-fx-background-color: fff;" text="Admin" visible="false">
                <graphic>
                   <FontIcon iconLiteral="far-clipboard" />
                </graphic></Button>

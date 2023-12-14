@@ -13,15 +13,14 @@ public class TrailTreeSet implements Serializable {
     }
 
     public void addTrail(Trail trail) throws Exception {
-        int MAX_SIZE = 50000;
-        if(trailSet.size() == MAX_SIZE) {
+        if(trailSet.size() == 50000) {
             throw new Exception("Can not go over 50,000 Trails");
         }
         this.trailSet.add(trail);
         BackUp.saveData();
     }
 
-    public void removeTrailFromSet(Trail trail) {
+    public void removeTrail(Trail trail) {
         trailSet.remove(trail);
         BackUp.saveData();
     }
@@ -46,9 +45,7 @@ public class TrailTreeSet implements Serializable {
         this.trailSet = trailSet;
     }
 
-    public void displayTrailSet() {
-        for (Trail trail : trailSet) {
-            System.out.println(trail);
-        }
+    public int size() {
+        return trailSet.size();
     }
 }

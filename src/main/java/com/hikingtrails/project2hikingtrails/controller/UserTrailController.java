@@ -17,7 +17,10 @@ import javafx.scene.shape.Line;
 import javafx.stage.FileChooser;
 
 import java.io.File;
+import java.io.IOException;
 import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.StandardCopyOption;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.stream.Collectors;
@@ -346,9 +349,20 @@ public class UserTrailController implements Initializable {
     }
 
     public void uploadPicture() {
-        file = fileChooser.showOpenDialog(null);
-        if (file != null) {
-            trailReviewPhotoIv.setImage(new Image(file.toURI().toString()));
+        File selectedFile = fileChooser.showOpenDialog(null);
+        if (selectedFile != null) {
+            try {
+                String directoryPath = "savedPictures";
+                File directory = new File(directoryPath);
+                String uniqueFileName = "profile_" + System.currentTimeMillis() + ".png";
+                File destinationFile = new File(directory, uniqueFileName);
+                Files.copy(selectedFile.toPath(), destinationFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
+                reviewPictureIv.setImage(new Image(destinationFile.toURI().toString()));
+                file = destinationFile;
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
 

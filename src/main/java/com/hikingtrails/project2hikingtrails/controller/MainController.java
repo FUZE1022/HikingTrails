@@ -1,7 +1,6 @@
 package com.hikingtrails.project2hikingtrails.controller;
 
 import com.hikingtrails.project2hikingtrails.model.DataCenter;
-import com.hikingtrails.project2hikingtrails.model.UserTreeMap;
 import com.hikingtrails.project2hikingtrails.model.UserTreeSet;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -23,12 +22,19 @@ public class MainController {
     @FXML
     private Hyperlink newUserHl;
     private UserTreeSet userTreeSet = DataCenter.getInstance().getUserTreeSet();
-    //private UserTreeMap userTreeMap = DataCenter.getInstance().getUserTreeMap();
     public void login(ActionEvent event) throws IOException {
-//        if(username.getText().equalsIgnoreCase("Admin") && passwordPf.getText().equals("SCCC")) {
-//            System.out.println("Admin login");
-//            //TODO: Admin login
-//        }
+        if(username.getText().equalsIgnoreCase("Admin") && passwordPf.getText().equals("SCCC")) {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/hikingtrails/project2hikingtrails/views" +
+                    "/RootAdminView.fxml"));
+            Stage stage = new Stage();
+            Scene newScene = new Scene(fxmlLoader.load(), 1018, 592);
+            stage.setTitle("User creation");
+            Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            currentStage.close();
+            stage.setScene(newScene);
+            stage.show();
+            return;
+        }
         if(userTreeSet.isValidUser(username.getText().trim(), passwordPf.getText())) {
             DataCenter.getInstance().setCurrentUser(userTreeSet.getUser(username.getText().trim()));
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/hikingtrails/project2hikingtrails/views" +
@@ -39,6 +45,7 @@ public class MainController {
             currentStage.close();
             stage.setScene(newScene);
             stage.show();
+            return;
         }
         else {
             Alert alert = new Alert(Alert.AlertType.ERROR);

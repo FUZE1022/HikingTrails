@@ -37,10 +37,4 @@ public class BlockTreeSet implements Serializable {
     public int size() {
         return blocked.size();
     }
-
-    public void displayBlockedTree() {
-        for (String user : blocked) {
-            System.out.println(user);
-        }
-    }
 }

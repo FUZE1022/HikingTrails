@@ -18,6 +18,10 @@ import javafx.stage.StageStyle;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.util.ResourceBundle;
 
 public class NewUserController implements Initializable {
@@ -34,7 +38,7 @@ public class NewUserController implements Initializable {
     private FileChooser fileChooser;
     private File file;
     private UserTreeSet userTreeSet = DataCenter.getInstance().getUserTreeSet();
-    //private UserTreeMap userTreeMap = DataCenter.getInstance().getUserTreeMap();
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         fileChooser = new FileChooser();
@@ -44,13 +48,7 @@ public class NewUserController implements Initializable {
         fileChooser.setInitialDirectory(new File("savedProfilePictures"));
     }
 
-    public void test() {
-        RootAdmin rootAdmin = new RootAdmin();
-        //rootAdmin.promoteToAdmin();
-    }
-
     public void createAccount() {
-        UserTreeMap userTree = new UserTreeMap();
         Dialog<ButtonType> dialog = new Dialog<>();
         dialog.setTitle("Confirmation");
         dialog.setHeaderText("Is this the user you'd like to create?");
@@ -67,8 +65,6 @@ public class NewUserController implements Initializable {
                 if (buttonType == yesButton) {
                     userTreeSet.addUserToSet(new User(usernameTf.getText(), passwordTf.getText(),
                             phoneNumTf.getText(), file.toURI().toString()));
-                    //userTreeMap.addUser(new User(usernameTf.getText(), passwordTf.getText(), phoneNumTf.getText(),
-                            //file.toURI().toString()));
                     Alert successAlert = new Alert(Alert.AlertType.INFORMATION);
                     successAlert.setTitle("Success");
                     successAlert.setHeaderText(null);
@@ -88,9 +84,20 @@ public class NewUserController implements Initializable {
     }
 
     public void chooseProfilePicture() {
-        file = fileChooser.showOpenDialog(null);
-        if (file != null) {
-            profilePictureIv.setImage(new Image(file.toURI().toString()));
+        File selectedFile = fileChooser.showOpenDialog(null);
+        if (selectedFile != null) {
+            try {
+                String directoryPath = "savedPictures";
+                File directory = new File(directoryPath);
+                String uniqueFileName = "profile_" + System.currentTimeMillis() + ".png";
+                File destinationFile = new File(directory, uniqueFileName);
+                Files.copy(selectedFile.toPath(), destinationFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
+                profilePictureIv.setImage(new Image(destinationFile.toURI().toString()));
+                file = destinationFile;
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
 
