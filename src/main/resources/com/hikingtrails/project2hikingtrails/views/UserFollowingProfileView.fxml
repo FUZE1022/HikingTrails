@@ -42,7 +42,7 @@
       <Button fx:id="checkHistoryBtn" layoutX="619.0" layoutY="137.0" mnemonicParsing="false" onAction="#checkHistory" text="Check Hiking History" />
       <Button fx:id="checkReviewAndCommentsBtn" layoutX="585.0" layoutY="184.0" mnemonicParsing="false" onAction="#checkReviewAndComments" text="Check All Reviews And Comments" />
       <ImageView fx:id="hikingHistoryIv" fitHeight="150.0" fitWidth="200.0" layoutX="215.0" layoutY="428.0" pickOnBounds="true" visible="false" />
-      <TextArea fx:id="hikingHistoryCommentTa" editable="false" layoutX="530.0" layoutY="428.0" prefHeight="150.0" prefWidth="268.0" visible="false" />
+      <TextArea fx:id="hikingHistoryCommentTa" editable="false" layoutX="530.0" layoutY="428.0" prefHeight="150.0" prefWidth="268.0" visible="false" wrapText="true" />
       <Button fx:id="checkImageAndCommentsBtn" layoutX="23.0" layoutY="295.0" mnemonicParsing="false" onAction="#checkImageAndComments" prefHeight="44.0" prefWidth="107.0" text="Check Image and Comments" wrapText="true" />
       <Label fx:id="noPicturesLbl" layoutX="206.0" layoutY="476.0" prefHeight="17.0" prefWidth="101.0" text="No Pictures" visible="false">
          <font>
@@ -59,7 +59,7 @@
       </TableView>
       <Pane fx:id="commentPane" layoutX="558.0" layoutY="277.0" prefHeight="200.0" prefWidth="268.0" visible="false" />
       <ImageView fx:id="reviewIv" fitHeight="144.0" fitWidth="200.0" layoutX="113.0" layoutY="436.0" pickOnBounds="true" preserveRatio="true" />
-      <TextArea fx:id="reviewTa" editable="false" layoutX="333.0" layoutY="437.0" prefHeight="138.0" prefWidth="218.0" visible="false" />
+      <TextArea fx:id="reviewTa" editable="false" layoutX="333.0" layoutY="437.0" prefHeight="138.0" prefWidth="218.0" visible="false" wrapText="true" />
       <Label fx:id="noPictureLbl" layoutX="168.0" layoutY="488.0" text="No Pictures" visible="false">
          <font>
             <Font size="20.0" />

@@ -35,7 +35,7 @@
             <TextField fx:id="endDateTf" prefHeight="25.0" prefWidth="90.0" promptText="End Date" />
          </children>
       </HBox>
-      <TextArea fx:id="commentTa" layoutX="688.0" layoutY="143.0" prefHeight="200.0" prefWidth="200.0" promptText="Comment" />
+      <TextArea fx:id="commentTa" layoutX="688.0" layoutY="143.0" prefHeight="200.0" prefWidth="200.0" promptText="Comment" wrapText="true" />
       <ImageView fx:id="picIv" fitHeight="136.0" fitWidth="200.0" layoutX="381.0" layoutY="143.0" pickOnBounds="true" />
       <Button fx:id="photoBtn" layoutX="434.0" layoutY="296.0" mnemonicParsing="false" onAction="#uploadFile" text="Upload Photo" />
       <Line endX="100.0" layoutX="481.0" layoutY="279.0" startX="-100.0" />
@@ -50,6 +50,5 @@
       <Label layoutX="72.0" layoutY="320.0" text="Time Format = Hour:Minute" />
       <Label layoutX="69.0" layoutY="386.0" text="Date Format = MM/DD/YYYY" />
       <Button fx:id="addBtn" layoutX="410.0" layoutY="464.0" mnemonicParsing="false" onAction="#addToHistory" prefHeight="25.0" prefWidth="139.0" text="Add To Hiking History" />
-      <Label layoutX="62.0" layoutY="117.0" text="Trail has to be from the Trail List" />
    </children>
 </AnchorPane>
